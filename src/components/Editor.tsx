@@ -27,7 +27,15 @@ const defaultConfig: Config = {
   tabSpaces: 4,
 };
 
+const getPlainNode = (value: string) => [
+  {
+    type: 'paragraph',
+    children: [{text: value}],
+  },
+];
+
 interface Props {
+  handleChange?: (value: Node[]) => void;
   defaultValue?: string;
   config?: Config;
 }
@@ -38,25 +46,27 @@ interface Props {
  * @param props
  */
 export default function Editor(props: Props): JSX.Element {
-  const {defaultValue = 'default', config: userConfig} = props;
-  const [value, setValue] = useState<Node[]>([
-    {
-      type: 'paragraph',
-      children: [{text: defaultValue}],
-    },
-  ]);
+  const {
+    handleChange = () => ({}),
+    defaultValue = 'default',
+    config: userConfig,
+  } = props;
+
+  const [value, setValue] = useState<Node[]>(getPlainNode(defaultValue));
   const config = {...defaultConfig, userConfig};
+
   const editor = useEditor();
   const renderElement = useCallback((props) => <Element {...props} />, []);
   const renderLeaf = useCallback((props) => <Leaf {...props} />, []);
 
+  const onChange = (newValue: Node[]) => {
+    handleChange(newValue);
+    setValue(newValue);
+  };
+
   return (
     <Box>
-      <Slate
-        editor={editor}
-        value={value}
-        onChange={(newValue) => setValue(newValue)}
-      >
+      <Slate editor={editor} value={value} onChange={onChange}>
         <Toolbar />
         <Editable
           renderElement={renderElement}
