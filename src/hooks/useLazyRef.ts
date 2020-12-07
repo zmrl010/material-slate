@@ -1,0 +1,17 @@
+import { MutableRefObject, useRef } from "react";
+
+const BASE = {};
+
+
+/**
+ * Lazily creates a ref. Used for something that only 
+ * needs to be created once or very rarely
+ * @param init initializer function to be called once
+ */
+export default function useLazyRef<T>(init: () => T): MutableRefObject<T> {
+  const valueRef = useRef<T>(BASE as T);
+  if (valueRef.current === BASE) {
+    valueRef.current = init();
+  }
+  return valueRef;
+}
