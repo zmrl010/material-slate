@@ -24,13 +24,8 @@ export function compose<R>(func: Composable<R>, ...funcs: Composable<R>[]): Comp
 }
 
 /**
- * Assigns a function expecting an object as its first parameter to an object
- * of that type and returns the object with that method to be called
- * without the object parameter
+ * Utility function that does nothing. Useful for prop default value that will be called.
  */
-// export function assign<
-//   O extends Record<string, unknown>,
-//   R,
-//   F extends (obj: O, ...args: unknown[]) => R>(obj: O, func: F): O & {[func]: (...args: Parameters<F>) => R} {
-//     obj[func.name] = ()
-// }
+export function noopFunc(): void {
+  return
+}

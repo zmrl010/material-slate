@@ -1,12 +1,14 @@
-import React, {useCallback, useState} from 'react';
+import React, {useCallback, useState, KeyboardEvent} from 'react';
 import {Node} from 'slate';
 import {Slate, Editable} from 'slate-react';
 import Element from './Element';
 import Leaf from './Leaf';
 import Toolbar from './Toolbar';
 import useEditor from '../hooks/useEditor';
-import isHotkey from 'is-hotkey';
 import {Box} from '@material-ui/core';
+import {fillSpaces} from '../util/text';
+import {noopFunc} from '../util/func';
+import {isReactHotkey} from '../util/hotkey';
 
 const HOTKEYS = {
   'mod+b': 'bold',
@@ -14,10 +16,6 @@ const HOTKEYS = {
   'mod+u': 'underline',
   'mod+`': 'code',
 };
-
-function fillSpaces(numSpaces: number) {
-  return Array.from({length: numSpaces}).fill(' ').join('');
-}
 
 interface Config {
   tabSpaces: number;
@@ -36,6 +34,7 @@ const getPlainNode = (value: string) => [
 
 interface Props {
   handleChange?: (value: Node[]) => void;
+  handleKeyDown?: (event: KeyboardEvent) => void;
   defaultValue?: string;
   config?: Config;
 }
@@ -47,7 +46,8 @@ interface Props {
  */
 export default function Editor(props: Props): JSX.Element {
   const {
-    handleChange = () => ({}),
+    handleChange = noopFunc,
+    handleKeyDown = noopFunc,
     defaultValue = 'default',
     config: userConfig,
   } = props;
@@ -78,7 +78,7 @@ export default function Editor(props: Props): JSX.Element {
           as={Box}
           onKeyDown={(event) => {
             for (const hotkey in HOTKEYS) {
-              if (isHotkey(hotkey, (event as unknown) as KeyboardEvent)) {
+              if (isReactHotkey(hotkey, event)) {
                 event.preventDefault();
                 const markType = HOTKEYS[hotkey as keyof typeof HOTKEYS];
                 editor.toggleMark({type: markType});
@@ -88,6 +88,7 @@ export default function Editor(props: Props): JSX.Element {
               event.preventDefault();
               editor.insertText(fillSpaces(config.tabSpaces));
             }
+            handleKeyDown(event);
           }}
         />
       </Slate>
