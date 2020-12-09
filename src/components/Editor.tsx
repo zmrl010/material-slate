@@ -34,8 +34,8 @@ const getPlainNode = (value: string) => [
 ];
 
 interface Props {
-  handleChange?: (value: Node[]) => void;
-  handleKeyDown?: (event: KeyboardEvent) => void;
+  onChange?: (value: Node[]) => void;
+  onKeyDown?: (event: KeyboardEvent) => void;
   defaultValue?: string;
   config?: Config;
 }
@@ -47,8 +47,8 @@ interface Props {
  */
 export default function Editor(props: Props): JSX.Element {
   const {
-    handleChange = noopFunc,
-    handleKeyDown = noopFunc,
+    onChange = noopFunc,
+    onKeyDown = noopFunc,
     defaultValue = 'default',
     config: userConfig,
   } = props;
@@ -60,14 +60,14 @@ export default function Editor(props: Props): JSX.Element {
   const renderElement = useCallback((props) => <Element {...props} />, []);
   const renderLeaf = useCallback((props) => <Leaf {...props} />, []);
 
-  const onChange = (newValue: Node[]) => {
-    handleChange(newValue);
+  const handleChange = (newValue: Node[]) => {
+    onChange(newValue);
     setValue(newValue);
   };
 
   return (
     <Box>
-      <Slate editor={editor} value={value} onChange={onChange}>
+      <Slate editor={editor} value={value} onChange={handleChange}>
         <Toolbar />
         <Editable
           renderElement={renderElement}
@@ -89,7 +89,7 @@ export default function Editor(props: Props): JSX.Element {
               event.preventDefault();
               editor.insertText(fillSpaces(config.tabSpaces));
             }
-            handleKeyDown(event);
+            onKeyDown(event);
           }}
         />
       </Slate>
