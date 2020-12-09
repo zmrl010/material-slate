@@ -19,6 +19,7 @@ const HOTKEYS = {
 
 interface Config {
   tabSpaces: number;
+  showToolbar?: 'always' | 'hover';
 }
 
 const defaultConfig: Config = {
