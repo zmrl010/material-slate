@@ -36,7 +36,7 @@ const getPlainNode = (value: string) => [
 interface Props {
   onChange?: (value: Node[]) => void;
   onKeyDown?: (event: KeyboardEvent) => void;
-  defaultValue?: string;
+  value?: string;
   config?: Config;
 }
 
@@ -49,11 +49,12 @@ export default function Editor(props: Props): JSX.Element {
   const {
     onChange = noopFunc,
     onKeyDown = noopFunc,
-    defaultValue = 'default',
+    value,
     config: userConfig,
   } = props;
-
-  const [value, setValue] = useState<Node[]>(getPlainNode(defaultValue));
+  const [currentValue, setCurrentValue] = useState<Node[]>(() =>
+    value ? JSON.parse(value) : getPlainNode('')
+  );
   const config = {...defaultConfig, userConfig};
 
   const editor = useEditor();
@@ -62,12 +63,12 @@ export default function Editor(props: Props): JSX.Element {
 
   const handleChange = (newValue: Node[]) => {
     onChange(newValue);
-    setValue(newValue);
+    setCurrentValue(newValue);
   };
 
   return (
     <Box>
-      <Slate editor={editor} value={value} onChange={handleChange}>
+      <Slate editor={editor} value={currentValue} onChange={handleChange}>
         <Toolbar />
         <Editable
           renderElement={renderElement}
