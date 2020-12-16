@@ -18,7 +18,8 @@ export type MaterialEditor = Editor & ReactEditor & HistoryEditor & MarkEditor &
  *  - withMarks
  * 
  */
-export default function makeEditor(): MaterialEditor {
+export function makeEditor(): MaterialEditor {
   return withLinks(withBlocks(withMarks(withHistory(withReact(createEditor())))))
 }
 
+export default makeEditor

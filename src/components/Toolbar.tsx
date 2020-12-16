@@ -9,7 +9,7 @@ import {
   Theme,
   Button,
 } from '@material-ui/core';
-import {BlockButton, LinkButton, MarkButton} from '../Buttons';
+import {BlockButton, LinkButton, MarkButton} from './Buttons';
 import {
   FormatBold as FormatBoldIcon,
   FormatItalic as FormatItalicIcon,
@@ -30,7 +30,7 @@ import {
   ArrowDropDown as ArrowDropDownIcon,
 } from '@material-ui/icons';
 // import {ToggleButtonGroup} from '@material-ui/lab';
-import {useMaterialSlate} from '../../hooks';
+// import {useMaterialSlate} from '../../hooks';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -58,13 +58,12 @@ const StyledButtonGroup = withStyles((theme) => ({
   },
 }))(ButtonGroup);
 
-// interface Props {}
+export interface ToolbarProps {
+  hiddenButtons?: number[];
+}
 
-const alignments = ['left', 'center', 'right', 'justify'] as const;
-
-export default function Toolbar(): JSX.Element {
-  const editor = useMaterialSlate();
-  const classes = useStyles();
+export function Toolbar(props: ToolbarProps): JSX.Element {
+  const classes = useStyles(props);
 
   return (
     <div>
@@ -134,3 +133,5 @@ export default function Toolbar(): JSX.Element {
     </div>
   );
 }
+
+export default Toolbar;

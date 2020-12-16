@@ -11,7 +11,7 @@ const useStyles = makeStyles({
   },
 });
 
-interface Leaf extends Text {
+export interface LeafNode extends Text {
   bold?: boolean;
   code?: boolean;
   italic?: boolean;
@@ -19,11 +19,11 @@ interface Leaf extends Text {
   fill?: boolean;
 }
 
-interface LeafProps extends RenderLeafProps {
-  leaf: Leaf;
+export interface LeafProps extends RenderLeafProps {
+  leaf: LeafNode;
 }
 
-export default function Leaf(props: LeafProps): JSX.Element {
+export function Leaf(props: LeafProps): JSX.Element {
   const {attributes, leaf} = props;
   let {children} = props;
   const classes = useStyles(leaf);
@@ -54,3 +54,5 @@ export default function Leaf(props: LeafProps): JSX.Element {
     </span>
   );
 }
+
+export default Leaf;

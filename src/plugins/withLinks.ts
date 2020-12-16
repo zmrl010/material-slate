@@ -1,14 +1,10 @@
-import { Transforms, Node, Range, Editor, Element } from 'slate'
+import { Transforms, Node, Range, Editor } from 'slate'
 import { ReactEditor } from 'slate-react'
 import { isUrl } from '../util/url'
 
-// export interface Link extends Node {
-//   url: string
-// }
-
 export type Link = Node & { url: string }
 
-function matchLink(node: Node) {
+export function matchLink(node: Node): boolean {
   return node.type === 'link'
 }
 
@@ -17,12 +13,6 @@ export function insertLink(editor: Editor, url: string): void {
     wrapLink(editor, url)
   }
 }
-
-// export function getActiveLink(editor: Editor): Link {
-//   const [link] = Editor.nodes<Link>(editor, { match: matchLink })
-
-//   return link
-// }
 
 export function isLinkActive(editor: Editor): boolean {
   const [link] = Editor.nodes(editor, { match: matchLink })
@@ -67,7 +57,7 @@ export interface LinkEditor extends ReactEditor {
  * 
  * @requires slate-react 
  */
-export default function withLinks<E extends ReactEditor>(editor: E): E & LinkEditor {
+export function withLinks<E extends ReactEditor>(editor: E): E & LinkEditor {
   const { insertData, insertText, isInline } = editor
   const linkEditor = editor as E & LinkEditor
 
@@ -100,3 +90,5 @@ export default function withLinks<E extends ReactEditor>(editor: E): E & LinkEdi
 
   return linkEditor
 }
+
+export default withLinks

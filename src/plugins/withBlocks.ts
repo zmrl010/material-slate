@@ -17,7 +17,7 @@ export interface BlockEditor extends Editor {
 }
 
 
-export default function withBlocks<E extends Editor>(editor: E): E & BlockEditor {
+export function withBlocks<E extends Editor>(editor: E): E & BlockEditor {
   const LIST_TYPES = new Set(["numbered-list", "bulleted-list"]);
 
   const newEditor = editor as E & BlockEditor
@@ -50,3 +50,5 @@ export default function withBlocks<E extends Editor>(editor: E): E & BlockEditor
 
   return newEditor
 }
+
+export default withBlocks

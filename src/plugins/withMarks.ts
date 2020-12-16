@@ -15,7 +15,7 @@ export interface MarkEditor extends Editor {
 }
 
 
-export default function withMarks<E extends Editor>(editor: E): E & MarkEditor {
+export function withMarks<E extends Editor>(editor: E): E & MarkEditor {
   const markEditor = editor as E & MarkEditor
 
   markEditor.isMarkActive = (mark: Mark) => {
@@ -33,3 +33,5 @@ export default function withMarks<E extends Editor>(editor: E): E & MarkEditor {
 
   return markEditor
 }
+
+export default withMarks

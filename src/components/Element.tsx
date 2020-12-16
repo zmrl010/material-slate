@@ -2,12 +2,6 @@ import React from 'react';
 import {Element as SlateElement} from 'slate';
 import {RenderElementProps} from 'slate-react';
 
-// const useStyles = makeStyles({
-//   element: {
-//     textAlign: (props: {alignment: Alignment}) => props.alignment,
-//   },
-// });
-
 export type ElementNodeType =
   | 'block-quote'
   | 'heading-one'
@@ -30,12 +24,11 @@ export interface ElementProps extends RenderElementProps {
   element: ElementNode | LinkElementNode;
 }
 
-// function renderElement(Element: string, props: ElementProps): JSX.Element {
-//   const {attributes, children} = props;
-//   return <Element {...attributes}>{children}</Element>;
-// }
-
-function Element({attributes, children, element}: ElementProps): JSX.Element {
+export function Element({
+  attributes,
+  children,
+  element,
+}: ElementProps): JSX.Element {
   switch (element.type) {
     case 'block-quote':
       return <blockquote {...attributes}>{children}</blockquote>;
