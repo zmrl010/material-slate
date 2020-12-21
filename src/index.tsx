@@ -6,4 +6,18 @@ import App from './App';
 const rootElement = document.getElementById('root');
 render(<App />, rootElement);
 
-// export {MaterialEditor} from './components';
+export {
+  MaterialEditor,
+  MaterialEditable,
+  Leaf,
+  Element,
+  Toolbar,
+} from './components';
+
+export type {
+  MaterialEditorProps,
+  MaterialEditableProps,
+  LeafProps,
+  ElementProps,
+  ToolbarProps,
+} from './components';
