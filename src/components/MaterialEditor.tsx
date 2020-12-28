@@ -13,7 +13,7 @@ const getPlainNode = (value: string) => [
 
 export interface MaterialEditorProps {
   onChange?: (value: Node[]) => void;
-  value?: string;
+  value?: Node[];
   children: ReactNode;
 }
 
@@ -23,20 +23,16 @@ export interface MaterialEditorProps {
  * @param props
  */
 export function MaterialEditor(props: MaterialEditorProps): JSX.Element {
-  const {onChange = noopFunc, value, children} = props;
-  const [currentValue, setCurrentValue] = useState<Node[]>(() =>
-    value ? JSON.parse(value) : getPlainNode('')
-  );
+  const {onChange = noopFunc, value = [], children} = props;
 
   const editor = useEditor();
 
   const handleChange = (newValue: Node[]) => {
     onChange(newValue);
-    setCurrentValue(newValue);
   };
 
   return (
-    <Slate editor={editor} value={currentValue} onChange={handleChange}>
+    <Slate editor={editor} value={value} onChange={handleChange}>
       {children}
     </Slate>
   );

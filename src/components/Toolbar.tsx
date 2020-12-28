@@ -8,6 +8,7 @@ import {
   createStyles,
   Theme,
   Button,
+  // Toolbar as MuiToolbar,
 } from '@material-ui/core';
 import {BlockButton, LinkButton, MarkButton} from './Buttons';
 import {
@@ -20,15 +21,16 @@ import {
   FormatQuote as FormatQuoteIcon,
   FormatListNumbered as FormatListNumberedIcon,
   FormatListBulleted as FormatListBulletedIcon,
-  FormatAlignLeft as FormatAlignLeftIcon,
-  FormatAlignCenter as FormatAlignCenterIcon,
-  FormatAlignRight as FormatAlignRightIcon,
-  FormatAlignJustify as FormatAlignJustifyIcon,
+  // FormatAlignLeft as FormatAlignLeftIcon,
+  // FormatAlignCenter as FormatAlignCenterIcon,
+  // FormatAlignRight as FormatAlignRightIcon,
+  // FormatAlignJustify as FormatAlignJustifyIcon,
   AddPhotoAlternate as AddPhotoAlternateIcon,
   FormatColorFill as FormatColorFillIcon,
   Link as LinkIcon,
   ArrowDropDown as ArrowDropDownIcon,
 } from '@material-ui/icons';
+// import {useFocused} from 'slate-react';
 // import {ToggleButtonGroup} from '@material-ui/lab';
 // import {useMaterialSlate} from '../../hooks';
 
@@ -41,6 +43,9 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     divider: {
       margin: theme.spacing(1, 0.5),
+    },
+    container: {
+      display: (props: {hidden: boolean}) => (props.hidden ? 'none' : ''),
     },
   })
 );
@@ -60,68 +65,57 @@ const StyledButtonGroup = withStyles((theme) => ({
 
 export interface ToolbarProps {
   hiddenButtons?: number[];
+  buttonSize?: 'small' | 'medium' | 'large';
+  hiddenOnBlur?: boolean;
+  hidden?: boolean;
 }
 
 export function Toolbar(props: ToolbarProps): JSX.Element {
-  const classes = useStyles(props);
+  const {buttonSize = 'small', hidden = false} = props;
+  const classes = useStyles({hidden});
 
   return (
-    <div>
+    <div className={classes.container}>
       <Paper elevation={0} className={classes.paper}>
         <StyledButtonGroup>
-          <BlockButton format="left">
-            <FormatAlignLeftIcon />
-          </BlockButton>
-          <BlockButton format={'center'}>
-            <FormatAlignCenterIcon />
-          </BlockButton>
-          <BlockButton format={'right'}>
-            <FormatAlignRightIcon />
-          </BlockButton>
-          <BlockButton format={'justify'}>
-            <FormatAlignJustifyIcon />
-          </BlockButton>
-        </StyledButtonGroup>
-        <Divider flexItem orientation="vertical" className={classes.divider} />
-        <StyledButtonGroup>
-          <MarkButton format={'bold'}>
+          <MarkButton format={'bold'} size={buttonSize}>
             <FormatBoldIcon />
           </MarkButton>
-          <MarkButton format={'italic'}>
+          <MarkButton format={'italic'} size={buttonSize}>
             <FormatItalicIcon />
           </MarkButton>
-          <MarkButton format={'underline'}>
+          <MarkButton format={'underline'} size={buttonSize}>
             <FormatUnderlinedIcon />
           </MarkButton>
-          <MarkButton format={'code'}>
+          <MarkButton format={'code'} size={buttonSize}>
             <CodeIcon />
           </MarkButton>
         </StyledButtonGroup>
         <Divider flexItem orientation="vertical" className={classes.divider} />
         <StyledButtonGroup>
-          <LinkButton>
+          <LinkButton size={buttonSize}>
             <LinkIcon />
           </LinkButton>
-          <MarkButton format={'fill'}>
+          <MarkButton format={'fill'} size={buttonSize}>
             <FormatColorFillIcon />
             <ArrowDropDownIcon />
           </MarkButton>
         </StyledButtonGroup>
         <Divider flexItem orientation="vertical" className={classes.divider} />
         <StyledButtonGroup>
-          <BlockButton format={'heading-one'}>
+          <BlockButton format={'heading-one'} size={buttonSize}>
             <LooksOneIcon />
           </BlockButton>
-          <BlockButton format={'heading-two'}>
+          <BlockButton format={'heading-two'} size={buttonSize}>
             <LooksTwoIcon />
           </BlockButton>
-          <BlockButton format={'block-quote'}>
+          <BlockButton format={'block-quote'} size={buttonSize}>
             <FormatQuoteIcon />
           </BlockButton>
-          <BlockButton format={'numbered-list'}>
+          <BlockButton format={'numbered-list'} size={buttonSize}>
             <FormatListNumberedIcon />
           </BlockButton>
-          <BlockButton format={'bulleted-list'}>
+          <BlockButton format={'bulleted-list'} size={buttonSize}>
             <FormatListBulletedIcon />
           </BlockButton>
         </StyledButtonGroup>
