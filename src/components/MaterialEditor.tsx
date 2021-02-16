@@ -1,15 +1,9 @@
-import React, {useState, ReactNode} from 'react';
-import {Node} from 'slate';
-import {Slate} from 'slate-react';
-import useEditor from '../hooks/useEditor';
-import {noopFunc} from '../util/func';
-
-const getPlainNode = (value: string) => [
-  {
-    type: 'paragraph',
-    children: [{text: value}],
-  },
-];
+import React, { ReactNode } from "react";
+import { Node } from "slate";
+import { Slate } from "slate-react";
+import useEditor from "../hooks/useEditor";
+import { makeEditor } from "../slate";
+import { noopFunc } from "../util/func";
 
 export interface MaterialEditorProps {
   onChange?: (value: Node[]) => void;
@@ -19,20 +13,14 @@ export interface MaterialEditorProps {
 
 /**
  * Material UI Slate rich text editor
- * TODO save on edit or save button?
  * @param props
  */
 export function MaterialEditor(props: MaterialEditorProps): JSX.Element {
-  const {onChange = noopFunc, value = [], children} = props;
-
+  const { onChange = noopFunc, value = [], children } = props;
   const editor = useEditor();
 
-  const handleChange = (newValue: Node[]) => {
-    onChange(newValue);
-  };
-
   return (
-    <Slate editor={editor} value={value} onChange={handleChange}>
+    <Slate editor={editor} value={value} onChange={onChange}>
       {children}
     </Slate>
   );

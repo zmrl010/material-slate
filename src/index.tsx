@@ -12,7 +12,7 @@ export {
   Leaf,
   Element,
   Toolbar,
-} from './components';
+} from "./components";
 
 export type {
   MaterialEditorProps,
@@ -20,4 +20,8 @@ export type {
   LeafProps,
   ElementProps,
   ToolbarProps,
-} from './components';
+} from "./components";
+
+export * from "slate";
+export * from "slate-react";
+export * from "slate-history";
