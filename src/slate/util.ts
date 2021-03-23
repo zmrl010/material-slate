@@ -1,6 +1,6 @@
 import { Node } from "slate";
 
-export function getPlainNode(text = ""): Node {
+export function makePlainNode(text = ""): Node {
   return {
     type: "paragraph",
     children: [{ text }],
@@ -8,5 +8,5 @@ export function getPlainNode(text = ""): Node {
 }
 
 export function makeBaseState(text = ""): Node[] {
-  return [getPlainNode(text)];
+  return [makePlainNode(text)];
 }

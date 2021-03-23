@@ -1,8 +1,7 @@
 import React, { ReactNode } from "react";
 import { Node } from "slate";
 import { Slate } from "slate-react";
-import useEditor from "../hooks/useEditor";
-import { makeEditor } from "../slate";
+import useMaterialEditor from "../hooks/useMaterialEditor";
 import { noopFunc } from "../util/func";
 
 export interface MaterialEditorProps {
@@ -17,7 +16,7 @@ export interface MaterialEditorProps {
  */
 export function MaterialEditor(props: MaterialEditorProps): JSX.Element {
   const { onChange = noopFunc, value = [], children } = props;
-  const editor = useEditor();
+  const editor = useMaterialEditor();
 
   return (
     <Slate editor={editor} value={value} onChange={onChange}>

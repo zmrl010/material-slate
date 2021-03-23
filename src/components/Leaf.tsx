@@ -1,12 +1,12 @@
-import {makeStyles} from '@material-ui/core';
-import React from 'react';
-import type {Text} from 'slate';
-import type {RenderLeafProps} from 'slate-react';
+import { makeStyles } from "@material-ui/core";
+import React from "react";
+import type { Text } from "slate";
+import type { RenderLeafProps } from "slate-react";
 
 const useStyles = makeStyles({
   fill: {
-    backgroundColor: (props: {fill?: boolean}) => {
-      return props.fill ? 'yellow' : '';
+    backgroundColor: (props: { fill?: boolean }) => {
+      return props.fill ? "yellow" : "";
     },
   },
 });
@@ -24,8 +24,8 @@ export interface LeafProps extends RenderLeafProps {
 }
 
 export function Leaf(props: LeafProps): JSX.Element {
-  const {attributes, leaf} = props;
-  let {children} = props;
+  const { attributes, leaf } = props;
+  let { children } = props;
   const classes = useStyles(leaf);
 
   if (leaf.bold) {

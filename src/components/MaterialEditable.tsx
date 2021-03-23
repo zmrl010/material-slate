@@ -21,7 +21,7 @@ const TAB_SPACES = 4;
 const useStyles = makeStyles(() =>
   createStyles({
     editable: {
-      minHeight: 100,
+      minHeight: "100px",
       height: "100%",
       width: "100%",
       cursor: "text",

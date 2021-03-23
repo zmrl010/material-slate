@@ -1,52 +1,60 @@
-import React from 'react';
-import {Element as SlateElement} from 'slate';
-import {RenderElementProps} from 'slate-react';
+import React from "react";
+import { Element as SlateElement } from "slate";
+import { RenderElementProps } from "slate-react";
+import { LinkElementNode } from "../plugins/withLinks";
+import { ImageElementNode } from "../plugins/withImages";
+import { ImageElement } from "./ImageElement";
+import useIsKeyPressed from "../hooks/useIsKeyPressed";
+import { Link } from "@material-ui/core";
 
 export type ElementNodeType =
-  | 'block-quote'
-  | 'heading-one'
-  | 'heading-two'
-  | 'list-item'
-  | 'numbered-list'
-  | 'bulleted-list'
-  | 'paragraph';
+  | "block-quote"
+  | "heading-one"
+  | "heading-two"
+  | "list-item"
+  | "numbered-list"
+  | "bulleted-list"
+  | "paragraph";
 
 export interface ElementNode extends SlateElement {
   type: ElementNodeType;
 }
 
-export interface LinkElementNode extends SlateElement {
-  type: 'link';
-  url: string;
-}
-
 export interface ElementProps extends RenderElementProps {
-  element: ElementNode | LinkElementNode;
+  element: ElementNode | LinkElementNode | ImageElementNode;
 }
 
-export function Element({
-  attributes,
-  children,
-  element,
-}: ElementProps): JSX.Element {
+export function Element(props: ElementProps): JSX.Element {
+  const { attributes, children, element } = props;
+
+  const isCtrlPressed = useIsKeyPressed("Control");
+
   switch (element.type) {
-    case 'block-quote':
+    case "block-quote":
       return <blockquote {...attributes}>{children}</blockquote>;
-    case 'bulleted-list':
+    case "bulleted-list":
       return <ul {...attributes}>{children}</ul>;
-    case 'heading-one':
+    case "heading-one":
       return <span {...attributes}>{children}</span>;
-    case 'heading-two':
+    case "heading-two":
       return <h2 {...attributes}>{children}</h2>;
-    case 'list-item':
+    case "list-item":
       return <li {...attributes}>{children}</li>;
-    case 'numbered-list':
+    case "numbered-list":
       return <ol {...attributes}>{children}</ol>;
-    case 'link':
+    case "link":
       return (
-        <a {...attributes} href={element.url}>
+        <div {...attributes} contentEditable={!isCtrlPressed}>
+          <Link href={element.url} target="_blank" rel="noreferrer">
+            {children}
+          </Link>
+        </div>
+      );
+    case "image":
+      return (
+        <ImageElement attributes={attributes} element={element}>
           {children}
-        </a>
+        </ImageElement>
       );
     default:
       return <p {...attributes}>{children}</p>;
