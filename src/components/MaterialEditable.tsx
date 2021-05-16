@@ -1,6 +1,5 @@
 import React, { useCallback, KeyboardEvent, KeyboardEventHandler } from "react";
-import { Editable } from "slate-react";
-import { useEditor } from "../hooks";
+import { Editable, useSlate } from "slate-react";
 import Leaf from "./Leaf";
 import Element from "./Element";
 import { isReactHotkey } from "../util/hotkey";
@@ -8,12 +7,14 @@ import { fillSpaces } from "../util/text";
 import { createStyles, makeStyles } from "@material-ui/core";
 
 import type { EditableProps } from "slate-react/dist/components/editable";
+import { TextFormat } from "../slate/custom-types";
 
 const HOTKEYS = {
   "mod+b": "bold",
   "mod+i": "italic",
   "mod+u": "underline",
   "mod+`": "code",
+  "mod+f": "fill",
 };
 
 const TAB_SPACES = 4;
@@ -32,16 +33,15 @@ const useStyles = makeStyles(() =>
 type BindingMap = { [k: string]: KeyboardEventHandler<HTMLDivElement> };
 
 function useEditableBindings(bindings: BindingMap = {}) {
-  const editor = useEditor();
+  const editor = useSlate();
 
   const onKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
-    for (const hotkey in HOTKEYS) {
+    Object.entries(HOTKEYS).forEach(([hotkey, mark]) => {
       if (isReactHotkey(hotkey, event)) {
         event.preventDefault();
-        const markType = HOTKEYS[hotkey as keyof typeof HOTKEYS];
-        editor.toggleMark({ type: markType });
+        editor.toggleMark(mark as TextFormat);
       }
-    }
+    });
     if (event.key === "Tab") {
       event.preventDefault();
       editor.insertText(fillSpaces(TAB_SPACES));

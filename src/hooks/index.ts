@@ -1,3 +1,3 @@
-export { useMaterialEditor as useEditor } from "./useMaterialEditor";
+export { useMaterialEditor } from "./useMaterialEditor";
 export { useLazyRef } from "./useLazyRef";
 export { useMaterialSlate } from "./useMaterialSlate";

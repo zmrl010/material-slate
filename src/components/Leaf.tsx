@@ -11,22 +11,13 @@ const useStyles = makeStyles({
   },
 });
 
-export interface LeafNode extends Text {
-  bold?: boolean;
-  code?: boolean;
-  italic?: boolean;
-  underline?: boolean;
-  fill?: boolean;
-}
-
 export interface LeafProps extends RenderLeafProps {
-  leaf: LeafNode;
+  leaf: Text;
 }
 
 export function Leaf(props: LeafProps): JSX.Element {
   const { attributes, leaf } = props;
   let { children } = props;
-  const classes = useStyles(leaf);
 
   if (leaf.bold) {
     children = <strong>{children}</strong>;
@@ -48,11 +39,11 @@ export function Leaf(props: LeafProps): JSX.Element {
     children = <u>{children}</u>;
   }
 
-  return (
-    <span {...attributes} className={classes.fill}>
-      {children}
-    </span>
-  );
+  if (leaf.fill) {
+    children = <span style={{ backgroundColor: leaf.fill }}>{children}</span>;
+  }
+
+  return <span {...attributes}>{children}</span>;
 }
 
 export default Leaf;

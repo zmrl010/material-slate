@@ -1,10 +1,11 @@
-import React from 'react';
-import {useMaterialSlate} from '../../hooks';
-import {ToggleButton} from './ToggleButton';
-import {ButtonProps} from '@material-ui/core';
+import React from "react";
+import { useMaterialSlate } from "../../hooks";
+import { ToggleButton } from "./ToggleButton";
+import { ButtonProps } from "@material-ui/core";
+import { TextFormat } from "../../slate/custom-types";
 
 interface Props extends ButtonProps {
-  format: string;
+  format: TextFormat;
 }
 
 export default function MarkButton({
@@ -17,10 +18,10 @@ export default function MarkButton({
   return (
     <ToggleButton
       value={format}
-      selected={editor.isMarkActive({type: format})}
+      selected={editor.isMarkActive(format)}
       onMouseDown={(e) => {
         e.preventDefault();
-        editor.toggleMark({type: format});
+        editor.toggleMark(format);
       }}
       {...props}
     >

@@ -7,9 +7,9 @@ import {
   Button,
 } from "@material-ui/core";
 import { AddPhotoAlternate as AddPhotoAlternateIcon } from "@material-ui/icons";
-import { useEditor } from "slate-react";
+import { useSlateStatic } from "slate-react";
 import React from "react";
-import { insertImage } from "../../plugins/withImages";
+import { insertImage } from "../../plugins";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -73,7 +73,7 @@ export interface ImageButtonProps extends ButtonProps {
 
 export default function ImageButton(props: ImageButtonProps): JSX.Element {
   const { uploadImage, ...buttonProps } = props;
-  const editor = useEditor();
+  const editor = useSlateStatic();
   const classes = useStyles();
 
   return (

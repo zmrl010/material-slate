@@ -1,7 +1,7 @@
 import { createStyles, makeStyles } from "@material-ui/core";
 import React, { ReactNode } from "react";
 import { RenderElementProps, useFocused, useSelected } from "slate-react";
-import { ImageElementNode } from "../plugins/withImages";
+import { ImageElement } from "../plugins";
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -16,10 +16,10 @@ const useStyles = makeStyles(() =>
 );
 
 export interface ImageElementProps extends RenderElementProps {
-  element: ImageElementNode;
+  element: ImageElement;
 }
 
-export function ImageElement(props: ImageElementProps): JSX.Element {
+export function Image(props: ImageElementProps): JSX.Element {
   const { attributes, children, element } = props;
   const selected = useSelected();
   const focused = useFocused();

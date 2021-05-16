@@ -1,12 +1,12 @@
-import { Node } from "slate";
+import { Descendant } from "slate";
 
-export function makePlainNode(text = ""): Node {
+export function makePlainNode(text = ""): Descendant {
   return {
     type: "paragraph",
     children: [{ text }],
   };
 }
 
-export function makeBaseState(text = ""): Node[] {
+export function makeBaseState(text = ""): Descendant[] {
   return [makePlainNode(text)];
 }

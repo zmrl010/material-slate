@@ -1,28 +1,10 @@
 import React from "react";
-import { Element as SlateElement } from "slate";
 import { RenderElementProps } from "slate-react";
-import { LinkElementNode } from "../plugins/withLinks";
-import { ImageElementNode } from "../plugins/withImages";
-import { ImageElement } from "./ImageElement";
+import { Image } from "./Image";
 import useIsKeyPressed from "../hooks/useIsKeyPressed";
 import { Link } from "@material-ui/core";
 
-export type ElementNodeType =
-  | "block-quote"
-  | "heading-one"
-  | "heading-two"
-  | "list-item"
-  | "numbered-list"
-  | "bulleted-list"
-  | "paragraph";
-
-export interface ElementNode extends SlateElement {
-  type: ElementNodeType;
-}
-
-export interface ElementProps extends RenderElementProps {
-  element: ElementNode | LinkElementNode | ImageElementNode;
-}
+export type ElementProps = RenderElementProps;
 
 export function Element(props: ElementProps): JSX.Element {
   const { attributes, children, element } = props;
@@ -52,9 +34,9 @@ export function Element(props: ElementProps): JSX.Element {
       );
     case "image":
       return (
-        <ImageElement attributes={attributes} element={element}>
+        <Image attributes={attributes} element={element}>
           {children}
-        </ImageElement>
+        </Image>
       );
     default:
       return <p {...attributes}>{children}</p>;

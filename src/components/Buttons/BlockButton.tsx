@@ -1,28 +1,26 @@
-import {ToggleButton} from './ToggleButton';
-import React from 'react';
-import {useMaterialSlate} from '../../hooks';
-import {ButtonProps} from '@material-ui/core';
+import { ToggleButton } from "./ToggleButton";
+import React from "react";
+import { useSlateStatic } from "slate-react";
+import { ButtonProps } from "@material-ui/core";
+import { ElementType } from "../../slate/custom-types";
 
 interface Props extends ButtonProps {
-  format: string;
+  format: ElementType;
 }
 
-export default function BlockButton({
-  children,
-  format,
-  ...props
-}: Props): JSX.Element {
-  const editor = useMaterialSlate();
+export default function BlockButton(props: Props): JSX.Element {
+  const { children, format, ...buttonProps } = props;
+  const editor = useSlateStatic();
 
   return (
     <ToggleButton
       value={format}
-      selected={editor.isBlockActive({type: format})}
+      selected={editor.isBlockActive({ type: format })}
       onMouseDown={(e) => {
         e.preventDefault();
-        editor.toggleBlock({type: format});
+        editor.toggleBlock({ type: format });
       }}
-      {...props}
+      {...buttonProps}
     >
       {children}
     </ToggleButton>
