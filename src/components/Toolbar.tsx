@@ -8,7 +8,6 @@ import {
   createStyles,
   Theme,
 } from "@material-ui/core";
-import { BlockButton, ImageButton, LinkButton, MarkButton } from "./buttons";
 import {
   FormatBold as FormatBoldIcon,
   FormatItalic as FormatItalicIcon,
@@ -27,6 +26,7 @@ import {
   Link as LinkIcon,
   ArrowDropDown as ArrowDropDownIcon,
 } from "@material-ui/icons";
+import { BlockButton, ImageButton, LinkButton, MarkButton } from "./buttons";
 import { UploadImage } from "./buttons/ImageButton";
 
 const useStyles = makeStyles((theme: Theme) =>

@@ -1,7 +1,7 @@
 import React from "react";
+import { ButtonProps } from "@material-ui/core";
 import { useMaterialSlate } from "../../hooks";
 import { ToggleButton } from "./ToggleButton";
-import { ButtonProps } from "@material-ui/core";
 import { TextFormat } from "../../slate/custom-types";
 
 interface Props extends ButtonProps {
