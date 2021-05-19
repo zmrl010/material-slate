@@ -7,8 +7,6 @@ import {
   withStyles,
   createStyles,
   Theme,
-  Button,
-  // Toolbar as MuiToolbar,
 } from "@material-ui/core";
 import { BlockButton, ImageButton, LinkButton, MarkButton } from "./buttons";
 import {
@@ -25,15 +23,11 @@ import {
   // FormatAlignCenter as FormatAlignCenterIcon,
   // FormatAlignRight as FormatAlignRightIcon,
   // FormatAlignJustify as FormatAlignJustifyIcon,
-  AddPhotoAlternate as AddPhotoAlternateIcon,
   FormatColorFill as FormatColorFillIcon,
   Link as LinkIcon,
   ArrowDropDown as ArrowDropDownIcon,
 } from "@material-ui/icons";
 import { UploadImage } from "./buttons/ImageButton";
-// import {useFocused} from 'slate-react';
-// import {ToggleButtonGroup} from '@material-ui/lab';
-// import {useMaterialSlate} from '../../hooks';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -129,9 +123,6 @@ export function Toolbar(props: ToolbarProps): JSX.Element {
         <StyledButtonGroup>
           <ImageButton uploadImage={uploadImage} />
         </StyledButtonGroup>
-        {/* <Button onClick={() => alert("Upload photo dialog")}>
-          <AddPhotoAlternateIcon />
-        </Button> */}
       </Paper>
     </div>
   );

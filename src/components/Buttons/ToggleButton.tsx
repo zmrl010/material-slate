@@ -1,13 +1,18 @@
-import React, {forwardRef, MouseEvent} from 'react';
+import React, { forwardRef, MouseEvent } from "react";
 import {
   ButtonBase,
   capitalize,
   ExtendButtonBase,
   ExtendButtonBaseTypeMap,
-} from '@material-ui/core';
-import {makeStyles, fade, createStyles, Theme} from '@material-ui/core/styles';
-import clsx from 'clsx';
-import {OverrideProps} from '@material-ui/core/OverridableComponent';
+} from "@material-ui/core";
+import { OverrideProps } from "@material-ui/core/OverridableComponent";
+import {
+  makeStyles,
+  fade,
+  createStyles,
+  Theme,
+} from "@material-ui/core/styles";
+import clsx from "clsx";
 
 // fade is being deprecated in an upcoming release
 // this alias will assist as a drop in replacement
@@ -22,34 +27,34 @@ const useStyles = makeStyles(
     createStyles({
       root: {
         ...theme.typography.button,
-        boxSizing: 'border-box',
+        boxSizing: "border-box",
         borderRadius: theme.shape.borderRadius,
         padding: 11,
         border: `1px solid ${alpha(theme.palette.action.active, 0.12)}`,
         color: alpha(theme.palette.action.active, 0.38),
-        '&$selected': {
+        "&$selected": {
           color: theme.palette.action.active,
           backgroundColor: alpha(theme.palette.action.active, 0.12),
-          '&:hover': {
+          "&:hover": {
             backgroundColor: alpha(theme.palette.action.active, 0.15),
           },
-          '& + &': {
+          "& + &": {
             borderLeft: 0,
             marginLeft: 0,
           },
         },
-        '&$disabled': {
+        "&$disabled": {
           color: alpha(theme.palette.action.disabled, 0.12),
         },
-        '&:hover': {
-          textDecoration: 'none',
+        "&:hover": {
+          textDecoration: "none",
           // Reset on mouse devices
           backgroundColor: alpha(theme.palette.text.primary, 0.05),
-          '@media (hover: none)': {
-            backgroundColor: 'transparent',
+          "@media (hover: none)": {
+            backgroundColor: "transparent",
           },
-          '&$disabled': {
-            backgroundColor: 'transparent',
+          "&$disabled": {
+            backgroundColor: "transparent",
           },
         },
       },
@@ -59,10 +64,10 @@ const useStyles = makeStyles(
       selected: {},
       /* Styles applied to the `label` wrapper element. */
       label: {
-        width: '100%', // Ensure the correct width for iOS Safari
-        display: 'inherit',
-        alignItems: 'inherit',
-        justifyContent: 'inherit',
+        width: "100%", // Ensure the correct width for iOS Safari
+        display: "inherit",
+        alignItems: "inherit",
+        justifyContent: "inherit",
       },
       /* Styles applied to the root element if `size="small"`. */
       sizeSmall: {
@@ -75,25 +80,25 @@ const useStyles = makeStyles(
         fontSize: theme.typography.pxToRem(15),
       },
     }),
-  {name: 'ToggleButton'}
+  { name: "ToggleButton" }
 );
 
 export type ToggleButtonClassKey =
-  | 'root'
-  | 'disabled'
-  | 'selected'
-  | 'label'
-  | 'sizeSmall'
-  | 'sizeLarge';
+  | "root"
+  | "disabled"
+  | "selected"
+  | "label"
+  | "sizeSmall"
+  | "sizeLarge";
 
 export type ToggleButtonTypeMap<
   P = unknown,
-  D extends React.ElementType = 'button'
+  D extends React.ElementType = "button"
 > = ExtendButtonBaseTypeMap<{
   props: P & {
     disableFocusRipple?: boolean;
     selected?: boolean;
-    size?: 'small' | 'medium' | 'large';
+    size?: "small" | "medium" | "large";
     value?: unknown;
   };
   defaultComponent: D;
@@ -101,7 +106,7 @@ export type ToggleButtonTypeMap<
 }>;
 
 export type ToggleButtonProps<
-  D extends React.ElementType = ToggleButtonTypeMap['defaultComponent'],
+  D extends React.ElementType = ToggleButtonTypeMap["defaultComponent"],
   P = Record<string, unknown>
 > = OverrideProps<ToggleButtonTypeMap<P, D>, D>;
 
@@ -116,7 +121,7 @@ export const ToggleButton: ExtendButtonBase<ToggleButtonTypeMap> = forwardRef(
       onChange,
       onClick,
       selected,
-      size = 'medium',
+      size = "medium",
       value,
       disableElevation,
       fullWidth,
@@ -140,7 +145,7 @@ export const ToggleButton: ExtendButtonBase<ToggleButtonTypeMap> = forwardRef(
           {
             [classes.disabled]: disabled,
             [classes.selected]: selected,
-            [sizeClass]: size !== 'medium',
+            [sizeClass]: size !== "medium",
           },
           className
         )}
