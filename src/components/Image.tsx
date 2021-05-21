@@ -1,5 +1,5 @@
 import { createStyles, makeStyles } from "@material-ui/core";
-import React, { ReactNode } from "react";
+import React from "react";
 import { RenderElementProps, useFocused, useSelected } from "slate-react";
 import { ImageElement } from "../plugins";
 
