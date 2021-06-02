@@ -1,6 +1,6 @@
 import React from "react";
 import { ButtonProps } from "@material-ui/core";
-import { useMaterialSlate } from "../../hooks";
+import { useSlate } from "slate-react";
 import { ToggleButton } from "./ToggleButton";
 import { TextFormat } from "../../slate/custom-types";
 
@@ -13,7 +13,7 @@ export default function MarkButton({
   format,
   ...props
 }: Props): JSX.Element {
-  const editor = useMaterialSlate();
+  const editor = useSlate();
 
   return (
     <ToggleButton

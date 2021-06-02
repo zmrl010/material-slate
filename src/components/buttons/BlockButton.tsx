@@ -1,6 +1,6 @@
 import { ToggleButton } from "./ToggleButton";
 import React from "react";
-import { useSlateStatic } from "slate-react";
+import { useSlate } from "slate-react";
 import { ButtonProps } from "@material-ui/core";
 import { ElementType } from "../../slate/custom-types";
 
@@ -10,7 +10,7 @@ interface Props extends ButtonProps {
 
 export default function BlockButton(props: Props): JSX.Element {
   const { children, format, ...buttonProps } = props;
-  const editor = useSlateStatic();
+  const editor = useSlate();
 
   return (
     <ToggleButton

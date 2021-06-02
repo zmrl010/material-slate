@@ -7,7 +7,7 @@ import {
   Button,
 } from "@material-ui/core";
 import { AddPhotoAlternate as AddPhotoAlternateIcon } from "@material-ui/icons";
-import { useSlateStatic } from "slate-react";
+import { useSlate } from "slate-react";
 import React from "react";
 import { insertImage } from "../../plugins";
 
@@ -73,7 +73,7 @@ export interface ImageButtonProps extends ButtonProps {
 
 export default function ImageButton(props: ImageButtonProps): JSX.Element {
   const { uploadImage, ...buttonProps } = props;
-  const editor = useSlateStatic();
+  const editor = useSlate();
   const classes = useStyles();
 
   return (

@@ -1,6 +1,6 @@
 import { ToggleButton } from "./ToggleButton";
 import React from "react";
-import { useSlateStatic } from "slate-react";
+import { useSlate } from "slate-react";
 import { ButtonProps } from "@material-ui/core";
 // import LinkDialog from "./LinkDialog";
 import { insertLink, isLinkActive } from "../../plugins";
@@ -12,7 +12,7 @@ interface Props extends ButtonProps {
 export default function LinkButton(props: Props): JSX.Element {
   const { children, ...buttonProps } = props;
   // const [dialogOpen, setDialogOpen] = useState(false);
-  const editor = useSlateStatic();
+  const editor = useSlate();
 
   return (
     <>

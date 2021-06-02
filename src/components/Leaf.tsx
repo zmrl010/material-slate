@@ -31,7 +31,8 @@ export function Leaf(props: LeafProps): JSX.Element {
   }
 
   if (leaf.fill) {
-    children = <span style={{ backgroundColor: leaf.fill }}>{children}</span>;
+    // TODO have picker to change fill color
+    children = <span style={{ backgroundColor: "yellow" }}>{children}</span>;
   }
 
   return <span {...attributes}>{children}</span>;

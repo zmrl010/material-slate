@@ -24,10 +24,11 @@ import {
   // FormatAlignJustify as FormatAlignJustifyIcon,
   FormatColorFill as FormatColorFillIcon,
   Link as LinkIcon,
-  ArrowDropDown as ArrowDropDownIcon,
+  // ArrowDropDown as ArrowDropDownIcon,
 } from "@material-ui/icons";
 import { BlockButton, ImageButton, LinkButton, MarkButton } from "./buttons";
 import { UploadImage } from "./buttons/ImageButton";
+import clsx from "clsx";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -38,9 +39,6 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     divider: {
       margin: theme.spacing(1, 0.5),
-    },
-    container: {
-      display: (props: { hidden: boolean }) => (props.hidden ? "none" : ""),
     },
   })
 );
@@ -61,22 +59,25 @@ const StyledButtonGroup = withStyles((theme) => ({
 export interface ToolbarProps {
   hiddenButtons?: number[];
   buttonSize?: "small" | "medium" | "large";
-  hiddenOnBlur?: boolean;
-  hidden?: boolean;
   uploadImage?: UploadImage;
+  className?: string;
+}
+
+function VerticalDivider() {
+  const classes = useStyles();
+
+  return (
+    <Divider flexItem orientation="vertical" className={classes.divider} />
+  );
 }
 
 export function Toolbar(props: ToolbarProps): JSX.Element {
-  const { buttonSize = "small", hidden = false, uploadImage } = props;
-  const classes = useStyles({ hidden });
-
-  const VerticalDivider = () => (
-    <Divider flexItem orientation="vertical" className={classes.divider} />
-  );
+  const { buttonSize = "small", uploadImage } = props;
+  const classes = useStyles();
 
   return (
-    <div className={classes.container}>
-      <Paper elevation={0} className={classes.paper}>
+    <div>
+      <Paper elevation={0} className={clsx(classes.paper)}>
         <StyledButtonGroup>
           <MarkButton format={"bold"} size={buttonSize}>
             <FormatBoldIcon />
@@ -98,7 +99,7 @@ export function Toolbar(props: ToolbarProps): JSX.Element {
           </LinkButton>
           <MarkButton format={"fill"} size={buttonSize}>
             <FormatColorFillIcon />
-            <ArrowDropDownIcon />
+            {/* <ArrowDropDownIcon /> */}
           </MarkButton>
         </StyledButtonGroup>
         <VerticalDivider />
