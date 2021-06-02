@@ -1,4 +1,4 @@
-import { BaseEditor, Descendant } from "slate";
+import { Editor, Descendant } from "slate";
 import { HistoryEditor } from "slate-history";
 import { ReactEditor } from "slate-react";
 import type {
@@ -11,7 +11,7 @@ import type {
   CheckListItemElement,
 } from "../plugins";
 
-export type MaterialEditor = BaseEditor &
+export type MaterialEditor = Editor &
   ReactEditor &
   HistoryEditor &
   MarkEditor &

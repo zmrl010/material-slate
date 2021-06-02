@@ -13,9 +13,9 @@ export function isMarkActive(editor: Editor, format: TextFormat): boolean {
 
 export function withMarks<E extends Editor>(editor: E): E & MarkEditor {
   const markEditor: MarkEditor = {
-    isMarkActive: (format) => isMarkActive(editor, format),
+    isMarkActive: (format) => isMarkActive(markEditor, format),
     toggleMark: (format) => {
-      if (isMarkActive(editor, format)) {
+      if (isMarkActive(markEditor, format)) {
         editor.removeMark(format);
       } else {
         editor.addMark(format, true);
