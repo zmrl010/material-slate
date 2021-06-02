@@ -8,6 +8,7 @@ import { createStyles, makeStyles } from "@material-ui/core";
 
 import type { EditableProps } from "slate-react/dist/components/editable";
 import { TextFormat } from "../slate/custom-types";
+import clsx from "clsx";
 
 const HOTKEYS = {
   "mod+b": "bold",
@@ -22,8 +23,7 @@ const TAB_SPACES = 4;
 const useStyles = makeStyles(() =>
   createStyles({
     editable: {
-      minHeight: "100px",
-      height: "100%",
+      minHeight: "150px",
       width: "100%",
       cursor: "text",
     },
@@ -57,6 +57,8 @@ function useEditableBindings(bindings: BindingMap = {}) {
 export type MaterialEditableProps = EditableProps;
 
 export function MaterialEditable(props: MaterialEditableProps): JSX.Element {
+  const { className, ...editableProps } = props;
+
   const renderElement = useCallback((props) => <Element {...props} />, []);
   const renderLeaf = useCallback((props) => <Leaf {...props} />, []);
 
@@ -70,9 +72,9 @@ export function MaterialEditable(props: MaterialEditableProps): JSX.Element {
       renderLeaf={renderLeaf}
       placeholder={"Start typing..."}
       spellCheck
-      className={classes.editable}
+      className={clsx(classes.editable, className)}
       onKeyDown={onKeyDown}
-      {...props}
+      {...editableProps}
     />
   );
 }
