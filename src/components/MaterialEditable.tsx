@@ -35,18 +35,21 @@ type BindingMap = { [k: string]: KeyboardEventHandler<HTMLDivElement> };
 function useEditableBindings(bindings: BindingMap = {}) {
   const editor = useSlate();
 
-  const onKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
-    Object.entries(HOTKEYS).forEach(([hotkey, mark]) => {
-      if (isReactHotkey(hotkey, event)) {
+  const onKeyDown = useCallback(
+    (event: KeyboardEvent<HTMLDivElement>) => {
+      Object.entries(HOTKEYS).forEach(([hotkey, mark]) => {
+        if (isReactHotkey(hotkey, event)) {
+          event.preventDefault();
+          editor.toggleMark(mark as TextFormat);
+        }
+      });
+      if (event.key === "Tab") {
         event.preventDefault();
-        editor.toggleMark(mark as TextFormat);
+        editor.insertText(fillSpaces(TAB_SPACES));
       }
-    });
-    if (event.key === "Tab") {
-      event.preventDefault();
-      editor.insertText(fillSpaces(TAB_SPACES));
-    }
-  };
+    },
+    [editor]
+  );
 
   return onKeyDown;
 }

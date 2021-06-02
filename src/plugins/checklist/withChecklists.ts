@@ -9,39 +9,38 @@ export function withChecklists<E extends Editor>(
 ): E & ChecklistEditor {
   const { deleteBackward } = editor;
 
-  return {
-    ...editor,
-    deleteBackward: (unit) => {
-      const { selection } = editor;
+  editor.deleteBackward = (unit) => {
+    const { selection } = editor;
 
-      if (selection && Range.isCollapsed(selection)) {
-        const [match] = Editor.nodes(editor, {
-          match: (node) =>
-            !Editor.isEditor(node) &&
-            Element.isElement(node) &&
-            node.type === "check-list-item",
-        });
+    if (selection && Range.isCollapsed(selection)) {
+      const [match] = Editor.nodes(editor, {
+        match: (node) =>
+          !Editor.isEditor(node) &&
+          Element.isElement(node) &&
+          node.type === "check-list-item",
+      });
 
-        if (match) {
-          const [, path] = match;
-          const start = Editor.start(editor, path);
+      if (match) {
+        const [, path] = match;
+        const start = Editor.start(editor, path);
 
-          if (Point.equals(selection.anchor, start)) {
-            const newProps: Partial<Element> = { type: "paragraph" };
+        if (Point.equals(selection.anchor, start)) {
+          const newProps: Partial<Element> = { type: "paragraph" };
 
-            Transforms.setNodes(editor, newProps, {
-              match: (node) =>
-                !Editor.isEditor(node) &&
-                Element.isElement(node) &&
-                node.type === "check-list-item",
-            });
-            return;
-          }
+          Transforms.setNodes(editor, newProps, {
+            match: (node) =>
+              !Editor.isEditor(node) &&
+              Element.isElement(node) &&
+              node.type === "check-list-item",
+          });
+          return;
         }
       }
-      deleteBackward(unit);
-    },
+    }
+    deleteBackward(unit);
   };
+
+  return editor;
 }
 
 export default withChecklists;

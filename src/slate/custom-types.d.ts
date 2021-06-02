@@ -1,22 +1,22 @@
-import { Editor, Descendant } from "slate";
+import { BaseEditor, Descendant } from "slate";
 import { HistoryEditor } from "slate-history";
 import { ReactEditor } from "slate-react";
 import type {
   BlockEditor,
   MarkEditor,
-  LinkEditor,
+  // LinkEditor,
   ImageEditor,
   LinkElement,
   ImageElement,
   CheckListItemElement,
 } from "../plugins";
 
-export type MaterialEditor = Editor &
+export type MaterialEditor = BaseEditor &
   ReactEditor &
   HistoryEditor &
   MarkEditor &
   BlockEditor &
-  LinkEditor &
+  // LinkEditor &
   ImageEditor;
 
 export type ElementType =

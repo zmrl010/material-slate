@@ -18,37 +18,37 @@ export interface ImageEditor {
 export function withImages<E extends Editor>(editor: E): E & ImageEditor {
   const { insertData, isVoid } = editor;
 
-  return {
-    ...editor,
-    isVoid: (element: SlateElement & { type?: string }) => {
-      return element.type === "image" ? true : isVoid(element);
-    },
-    insertData: (data) => {
-      const text = data.getData("text/plain");
-      const { files } = data;
-
-      if (files && files.length > 0) {
-        for (const file of files) {
-          const reader = new FileReader();
-          const [mime] = file.type.split("/");
-          if (mime === "image") {
-            reader.addEventListener("load", () => {
-              const url = reader.result;
-              if (isString(url)) {
-                insertImage(editor, url);
-              }
-            });
-
-            reader.readAsDataURL(file);
-          }
-        }
-      } else if (isImageUrl(text)) {
-        insertImage(editor, text);
-      } else {
-        insertData(data);
-      }
-    },
+  editor.isVoid = (element: SlateElement & { type?: string }) => {
+    return element.type === "image" ? true : isVoid(element);
   };
+
+  editor.insertData = (data) => {
+    const text = data.getData("text/plain");
+    const { files } = data;
+
+    if (files && files.length > 0) {
+      for (const file of files) {
+        const reader = new FileReader();
+        const [mime] = file.type.split("/");
+        if (mime === "image") {
+          reader.addEventListener("load", () => {
+            const url = reader.result;
+            if (isString(url)) {
+              insertImage(editor, url);
+            }
+          });
+
+          reader.readAsDataURL(file);
+        }
+      }
+    } else if (isImageUrl(text)) {
+      insertImage(editor, text);
+    } else {
+      insertData(data);
+    }
+  };
+
+  return editor;
 }
 
 export function insertImage(editor: Editor, url: string): void {

@@ -20,34 +20,34 @@ export function isBlockActive(
 }
 
 export function withBlocks<E extends Editor>(editor: E): E & BlockEditor {
-  return {
-    ...editor,
-    isBlockActive: (element) => isBlockActive(editor, element),
-    toggleBlock: (element) => {
-      const isActive = isBlockActive(editor, element);
-      const isList = LIST_TYPES.has(element.type);
+  editor.isBlockActive = (element) => isBlockActive(editor, element);
 
-      Transforms.unwrapNodes(editor, {
-        match: (node) =>
-          !Editor.isEditor(node) &&
-          Element.isElement(node) &&
-          LIST_TYPES.has(node.type as string),
-        split: true,
-      });
+  editor.toggleBlock = (element) => {
+    const isActive = isBlockActive(editor, element);
+    const isList = LIST_TYPES.has(element.type);
 
-      const newProperties: Partial<Element> = {
-        type: isActive ? "paragraph" : isList ? "list-item" : element.type,
-      };
+    Transforms.unwrapNodes(editor, {
+      match: (node) =>
+        !Editor.isEditor(node) &&
+        Element.isElement(node) &&
+        LIST_TYPES.has(node.type as string),
+      split: true,
+    });
 
-      Transforms.setNodes(editor, newProperties);
+    const newProperties: Partial<Element> = {
+      type: isActive ? "paragraph" : isList ? "list-item" : element.type,
+    };
 
-      if (!isActive && isList) {
-        const selected = { type: element.type, children: [] };
-        // FIXME type assertion
-        Transforms.wrapNodes(editor, selected as Element);
-      }
-    },
+    Transforms.setNodes(editor, newProperties);
+
+    if (!isActive && isList) {
+      const selected = { type: element.type, children: [] };
+      // FIXME type assertion
+      Transforms.wrapNodes(editor, selected as Element);
+    }
   };
+
+  return editor;
 }
 
 export default withBlocks;
