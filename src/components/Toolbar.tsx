@@ -26,35 +26,41 @@ import {
   Link as LinkIcon,
   // ArrowDropDown as ArrowDropDownIcon,
 } from "@material-ui/icons";
+import clsx from "clsx";
 import { BlockButton, ImageButton, LinkButton, MarkButton } from "./buttons";
 import { UploadImage } from "./buttons/ImageButton";
-import clsx from "clsx";
+import { theme } from "../theme";
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    paper: {
-      display: "flex",
-      border: `1px solid ${theme.palette.divider}`,
-      flexWrap: "wrap",
-    },
-    divider: {
-      margin: theme.spacing(1, 0.5),
-    },
-  })
+const useStyles = makeStyles(
+  (theme: Theme) =>
+    createStyles({
+      paper: {
+        display: "flex",
+        border: `1px solid ${theme.palette.divider}`,
+        flexWrap: "wrap",
+      },
+      divider: {
+        margin: theme.spacing(1, 0.5),
+      },
+    }),
+  { name: "Toolbar", defaultTheme: theme }
 );
 
-const StyledButtonGroup = withStyles((theme) => ({
-  grouped: {
-    margin: theme.spacing(0.5),
-    border: "none",
-    "&:not(:first-child)": {
-      borderRadius: theme.shape.borderRadius,
+const StyledButtonGroup = withStyles(
+  (theme) => ({
+    grouped: {
+      margin: theme.spacing(0.5),
+      border: "none",
+      "&:not(:first-child)": {
+        borderRadius: theme.shape.borderRadius,
+      },
+      "&:first-child": {
+        borderRadius: theme.shape.borderRadius,
+      },
     },
-    "&:first-child": {
-      borderRadius: theme.shape.borderRadius,
-    },
-  },
-}))(ButtonGroup);
+  }),
+  { name: "StyledButtonGroup", defaultTheme: theme }
+)(ButtonGroup);
 
 export interface ToolbarProps {
   hiddenButtons?: number[];
@@ -120,10 +126,14 @@ export function Toolbar(props: ToolbarProps): JSX.Element {
             <FormatListBulletedIcon />
           </BlockButton>
         </StyledButtonGroup>
-        <VerticalDivider />
-        <StyledButtonGroup>
-          <ImageButton uploadImage={uploadImage} />
-        </StyledButtonGroup>
+        {uploadImage && (
+          <>
+            <VerticalDivider />
+            <StyledButtonGroup>
+              <ImageButton uploadImage={uploadImage} />
+            </StyledButtonGroup>
+          </>
+        )}
       </Paper>
     </div>
   );

@@ -4,7 +4,6 @@ import { ReactEditor } from "slate-react";
 import type {
   BlockEditor,
   MarkEditor,
-  // LinkEditor,
   ImageEditor,
   LinkElement,
   ImageElement,
@@ -16,7 +15,6 @@ export type MaterialEditor = BaseEditor &
   HistoryEditor &
   MarkEditor &
   BlockEditor &
-  // LinkEditor &
   ImageEditor;
 
 export type ElementType =

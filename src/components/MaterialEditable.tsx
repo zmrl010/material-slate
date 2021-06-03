@@ -1,4 +1,4 @@
-import React, { useCallback, KeyboardEvent, KeyboardEventHandler } from "react";
+import React, { useCallback, KeyboardEvent } from "react";
 import { Editable, useSlate } from "slate-react";
 import Leaf from "./Leaf";
 import Element from "./Element";
@@ -30,9 +30,7 @@ const useStyles = makeStyles(() =>
   })
 );
 
-type BindingMap = { [k: string]: KeyboardEventHandler<HTMLDivElement> };
-
-function useEditableBindings(bindings: BindingMap = {}) {
+function useEditableBindings() {
   const editor = useSlate();
 
   const onKeyDown = useCallback(

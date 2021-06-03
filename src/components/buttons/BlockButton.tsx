@@ -16,7 +16,7 @@ export default function BlockButton(props: Props): JSX.Element {
     <ToggleButton
       value={format}
       selected={editor.isBlockActive({ type: format })}
-      onMouseDown={(e) => {
+      onClick={(e) => {
         e.preventDefault();
         editor.toggleBlock({ type: format });
       }}

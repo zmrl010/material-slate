@@ -1,9 +1,22 @@
 import { createEditor, Editor } from "slate";
-import { withHistory } from "slate-history";
-import { withReact } from "slate-react";
-import { withBlocks, withMarks, withLinks, withImages } from "../plugins";
+import { withHistory, HistoryEditor } from "slate-history";
+import { withReact, ReactEditor } from "slate-react";
+import {
+  withBlocks,
+  withMarks,
+  withLinks,
+  withImages,
+  BlockEditor,
+  MarkEditor,
+  ImageEditor,
+} from "../plugins";
 
-export type MaterialEditor = Editor;
+export type MaterialEditor = Editor &
+  ReactEditor &
+  HistoryEditor &
+  MarkEditor &
+  BlockEditor &
+  ImageEditor;
 
 /**
  * Creates a rich text editor for Material UI with plugins:

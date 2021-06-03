@@ -1,11 +1,9 @@
-import React, { forwardRef, MouseEvent } from "react";
+import React from "react";
 import {
   ButtonBase,
-  capitalize,
-  ExtendButtonBase,
-  ExtendButtonBaseTypeMap,
+  ButtonProps,
+  capitalize as muiCapitalize,
 } from "@material-ui/core";
-import { OverrideProps } from "@material-ui/core/OverridableComponent";
 import {
   makeStyles,
   fade,
@@ -14,9 +12,26 @@ import {
 } from "@material-ui/core/styles";
 import clsx from "clsx";
 
+/**
+ * @todo fix module typings
+ * * Ignored any declaration below
+ * * Weird type extensions are causing many props to appear as any,
+ *   thus no type safety
+ */
+
 // fade is being deprecated in an upcoming release
 // this alias will assist as a drop in replacement
 const alpha = fade;
+
+function capitalize<S extends string>(s: S): Capitalize<S> {
+  return muiCapitalize(s) as Capitalize<S>;
+}
+
+type Size = "small" | "medium" | "large";
+
+function getSizeClass<S extends Size>(size: S): `size${Capitalize<S>}` {
+  return `size${capitalize(size)}` as `size${Capitalize<S>}`;
+}
 
 /**
  * ToggleButton styles taken from
@@ -74,6 +89,8 @@ const useStyles = makeStyles(
         padding: 7,
         fontSize: theme.typography.pxToRem(13),
       },
+      /* placeholder for proper typing */
+      sizeMedium: {},
       /* Styles applied to the root element if `size="large"`. */
       sizeLarge: {
         padding: 15,
@@ -83,96 +100,46 @@ const useStyles = makeStyles(
   { name: "ToggleButton" }
 );
 
-export type ToggleButtonClassKey =
-  | "root"
-  | "disabled"
-  | "selected"
-  | "label"
-  | "sizeSmall"
-  | "sizeLarge";
+export interface ToggleButtonProps extends ButtonProps {
+  selected?: boolean;
+}
 
-export type ToggleButtonTypeMap<
-  P = unknown,
-  D extends React.ElementType = "button"
-> = ExtendButtonBaseTypeMap<{
-  props: P & {
-    disableFocusRipple?: boolean;
-    selected?: boolean;
-    size?: "small" | "medium" | "large";
-    value?: unknown;
-  };
-  defaultComponent: D;
-  classKey: ToggleButtonClassKey;
-}>;
+export const ToggleButton = function ToggleButton(
+  props: ToggleButtonProps
+): JSX.Element {
+  const {
+    children,
+    className,
+    disabled = false,
+    disableFocusRipple = false,
+    selected,
+    size = "medium",
+    ...other
+  } = props;
 
-export type ToggleButtonProps<
-  D extends React.ElementType = ToggleButtonTypeMap["defaultComponent"],
-  P = Record<string, unknown>
-> = OverrideProps<ToggleButtonTypeMap<P, D>, D>;
+  const classes = useStyles();
 
-export const ToggleButton: ExtendButtonBase<ToggleButtonTypeMap> = forwardRef(
-  function ToggleButton(props: ToggleButtonProps, ref): JSX.Element {
-    const {
-      classes: propsClasses = {},
-      children,
-      className,
-      disabled = false,
-      disableFocusRipple = false,
-      onChange,
-      onClick,
-      selected,
-      size = "medium",
-      value,
-      disableElevation,
-      fullWidth,
-      ...other
-    } = props;
+  const sizeClassName = getSizeClass(size);
 
-    const toggleClasses = useStyles();
-    const classes: typeof toggleClasses &
-      typeof propsClasses &
-      Record<string, string | undefined> = {
-      ...toggleClasses,
-      ...propsClasses,
-    };
-
-    const sizeClass = classes[`size${capitalize(size)}`] as string;
-
-    return (
-      <ButtonBase
-        className={clsx(
-          classes.root,
-          {
-            [classes.disabled]: disabled,
-            [classes.selected]: selected,
-            [sizeClass]: size !== "medium",
-          },
-          className
-        )}
-        disabled={disabled}
-        focusRipple={!disableFocusRipple}
-        onChange={(event) => {
-          if (onClick) {
-            onClick(event as MouseEvent<HTMLButtonElement>);
-            if (event.isDefaultPrevented()) {
-              return;
-            }
-          }
-
-          if (onChange) {
-            onChange(event);
-          }
-        }}
-        onClick={onClick}
-        ref={ref}
-        value={value}
-        aria-pressed={selected}
-        {...other}
-      >
-        <span className={classes.label}>{children}</span>
-      </ButtonBase>
-    );
-  }
-) as ExtendButtonBase<ToggleButtonTypeMap>;
+  return (
+    <ButtonBase
+      className={clsx(
+        classes.root,
+        {
+          [classes.disabled]: disabled,
+          [classes.selected]: selected,
+          [classes[sizeClassName]]: size !== "medium",
+        },
+        className
+      )}
+      disabled={disabled}
+      focusRipple={!disableFocusRipple}
+      aria-pressed={Boolean(selected)}
+      {...other}
+    >
+      <span className={classes.label}>{children}</span>
+    </ButtonBase>
+  );
+};
 
 export default ToggleButton;
