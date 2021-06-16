@@ -5,8 +5,8 @@ import { makeEditor } from "../slate";
 import { noopFunc } from "../util/func";
 
 export interface MaterialEditorProps {
-  onChange?: (value: Descendant[]) => void;
-  value?: Descendant[];
+  onChange?: ((value: Descendant[]) => void) | undefined;
+  value?: Descendant[] | undefined;
   children: ReactNode;
 }
 

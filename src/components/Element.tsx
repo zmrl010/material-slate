@@ -38,6 +38,7 @@ export function Element(props: ElementProps): JSX.Element {
           {children}
         </Image>
       );
+    case "paragraph":
     default:
       return <p {...attributes}>{children}</p>;
   }

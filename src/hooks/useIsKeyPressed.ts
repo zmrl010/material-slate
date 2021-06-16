@@ -20,8 +20,10 @@ export default function useIsKeyPressed(key: string): boolean {
         setIsKeyPressed(false);
       }
     };
+
     globalThis.addEventListener("keydown", keyDownHandler);
     globalThis.addEventListener("keyup", keyUpHandler);
+
     return () => {
       globalThis.removeEventListener("keydown", keyDownHandler);
       globalThis.removeEventListener("keyup", keyUpHandler);
