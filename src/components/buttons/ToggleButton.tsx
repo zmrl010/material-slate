@@ -114,6 +114,11 @@ export const ToggleButton = function ToggleButton(
     disableFocusRipple = false,
     selected,
     size = "medium",
+    // <-- extract props -->
+    // needed to pull these out so they dont get passed to dom
+    disableElevation,
+    fullWidth,
+    // <-- end extract -->
     ...other
   } = props;
 
