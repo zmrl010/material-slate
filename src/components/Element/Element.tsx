@@ -1,8 +1,9 @@
 import React from "react";
 import { RenderElementProps } from "slate-react";
 import { Image } from "./Image";
-import useIsKeyPressed from "../hooks/useIsKeyPressed";
+import useIsKeyPressed from "../../hooks/useIsKeyPressed";
 import { Link } from "@material-ui/core";
+import { Heading } from "./Heading";
 
 export type ElementProps = RenderElementProps;
 
@@ -16,10 +17,12 @@ export function Element(props: ElementProps): JSX.Element {
       return <blockquote {...attributes}>{children}</blockquote>;
     case "bulleted-list":
       return <ul {...attributes}>{children}</ul>;
-    case "heading-one":
-      return <span {...attributes}>{children}</span>;
-    case "heading-two":
-      return <h2 {...attributes}>{children}</h2>;
+    case "heading":
+      return (
+        <Heading attributes={attributes} element={element}>
+          {children}
+        </Heading>
+      );
     case "list-item":
       return <li {...attributes}>{children}</li>;
     case "numbered-list":

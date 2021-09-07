@@ -1,18 +1,14 @@
-import React from "react";
 import { ButtonProps } from "@material-ui/core";
+import ToggleButton from "@material-ui/lab/ToggleButton";
 import { useSlate } from "slate-react";
-import { ToggleButton } from "./ToggleButton";
 import { TextFormat } from "../../slate/custom-types";
 
 interface Props extends ButtonProps {
   format: TextFormat;
 }
 
-export default function MarkButton({
-  children,
-  format,
-  ...props
-}: Props): JSX.Element {
+export function MarkButton(props: Props): JSX.Element {
+  const { children, format, ...buttonProps } = props;
   const editor = useSlate();
 
   return (
@@ -23,9 +19,11 @@ export default function MarkButton({
         e.preventDefault();
         editor.toggleMark(format);
       }}
-      {...props}
+      {...buttonProps}
     >
       {children}
     </ToggleButton>
   );
 }
+
+export default MarkButton;

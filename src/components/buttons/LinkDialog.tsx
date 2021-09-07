@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Button,
   Dialog,
@@ -9,13 +9,13 @@ import {
 
 interface Props {
   open: boolean;
-  handleClose: () => void;
+  onClose: () => void;
   defaultValue?: string;
   onSubmit: (link: string) => void;
 }
 
-export default function LinkDialog(props: Props): JSX.Element {
-  const { open, handleClose, onSubmit, defaultValue = "" } = props;
+export function LinkDialog(props: Props): JSX.Element {
+  const { open, onClose, onSubmit, defaultValue = "" } = props;
   const [link, setLink] = useState(defaultValue);
 
   // const protocol = "https://";
@@ -28,16 +28,12 @@ export default function LinkDialog(props: Props): JSX.Element {
   }, [open, defaultValue]);
 
   return (
-    <Dialog
-      open={open}
-      onClose={handleClose}
-      aria-labelledby="form-dialog-title"
-    >
+    <Dialog open={open} onClose={onClose} aria-labelledby="form-dialog-title">
       <form
         onSubmit={(e) => {
           e.preventDefault();
           onSubmit(link);
-          handleClose();
+          onClose();
         }}
       >
         {/* <DialogTitle id="form-dialog-title">Hyperlink</DialogTitle> */}
@@ -58,7 +54,7 @@ export default function LinkDialog(props: Props): JSX.Element {
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} color="primary">
+          <Button onClick={onClose} color="primary">
             Cancel
           </Button>
           <Button color="primary" type="submit">
@@ -69,3 +65,5 @@ export default function LinkDialog(props: Props): JSX.Element {
     </Dialog>
   );
 }
+
+export default LinkDialog;

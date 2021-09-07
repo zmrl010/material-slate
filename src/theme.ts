@@ -1,3 +1,4 @@
+import "@material-ui/lab/themeAugmentation";
 import { createMuiTheme } from "@material-ui/core";
 import { unstable_createMuiStrictModeTheme } from "@material-ui/core";
 
@@ -13,4 +14,10 @@ const createTheme =
 /**
  * Base theme to be used if not wrapped in theme provider
  */
-export const theme = createTheme({});
+export const theme = createTheme({
+  props: {
+    MuiToggleButton: {
+      size: "small",
+    },
+  },
+});

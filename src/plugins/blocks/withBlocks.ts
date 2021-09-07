@@ -4,7 +4,7 @@ const LIST_TYPES = new Set(["numbered-list", "bulleted-list"]);
 
 export interface BlockEditor {
   isBlockActive: (element: Pick<Element, "type">) => boolean;
-  toggleBlock: (element: Pick<Element, "type">) => void;
+  toggleBlock: (element: Omit<Element, "children">) => void;
 }
 
 export function isBlockActive(

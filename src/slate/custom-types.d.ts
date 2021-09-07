@@ -1,4 +1,4 @@
-import { BaseEditor, Descendant } from "slate";
+import { BaseEditor } from "slate";
 import { HistoryEditor } from "slate-history";
 import { ReactEditor } from "slate-react";
 import type {
@@ -17,46 +17,42 @@ export type MaterialEditor = BaseEditor &
   BlockEditor &
   ImageEditor;
 
-export type ElementType =
-  | "block-quote"
-  | "bulleted-list"
-  | "check-list-item"
-  | "heading-one"
-  | "heading-two"
-  | "list-item"
-  | "numbered-list"
-  | "paragraph";
-
-export type BlockQuoteElement = { type: "block-quote"; children: Descendant[] };
+export type BlockQuoteElement = { type: "block-quote"; children: CustomText[] };
 
 export type BulletedListElement = {
   type: "bulleted-list";
-  children: Descendant[];
+  children: CustomText[];
+};
+
+export type HeadingElement = {
+  type: "heading";
+  level?: 1 | 2 | 3 | 4 | 5 | 6 | 7;
+  children: CustomText[];
 };
 
 export type HeadingOneElement = {
   type: "heading-one";
-  children: Descendant[];
+  children: CustomText[];
 };
 
 export type HeadingTwoElement = {
   type: "heading-two";
-  children: Descendant[];
+  children: CustomText[];
 };
 
 export type ListItemElement = {
   type: "list-item";
-  children: Descendant[];
+  children: CustomText[];
 };
 
 export type NumberedListElement = {
   type: "numbered-list";
-  children: Descendant[];
+  children: CustomText[];
 };
 
 export type ParagraphElement = {
   type: "paragraph";
-  children: Descendant[];
+  children: CustomText[];
 };
 
 export type BlockElement =
@@ -70,6 +66,8 @@ export type BlockElement =
   | ParagraphElement;
 
 export type CustomElement = LinkElement | ImageElement | BlockElement;
+
+export type ElementType = CustomElement["type"];
 
 export type FormattedText = {
   bold?: boolean;

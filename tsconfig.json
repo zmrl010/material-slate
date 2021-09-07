@@ -20,7 +20,7 @@
     "noEmit": true,
     "noImplicitAny": true,
     "noImplicitThis": true,
-    "jsx": "react"
+    "jsx": "react-jsx"
   },
   "include": [
     "./src/**/*"

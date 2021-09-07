@@ -11,14 +11,15 @@
   "dependencies": {
     "@material-ui/core": "~4.11",
     "@material-ui/icons": "~4.11",
+    "@material-ui/lab": "*",
     "clsx": "^1.1.1",
     "is-hotkey": "0.1.6",
-    "react": "~17.0",
-    "react-dom": "~17.0",
-    "react-scripts": "^4.0.0",
-    "slate": "0.59.0",
-    "slate-history": "^0.59.0",
-    "slate-react": "0.59.0"
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-scripts": "^4.0.3",
+    "slate": "^0.65.3",
+    "slate-history": "^0.65.3",
+    "slate-react": "^0.65.3"
   },
   "devDependencies": {
     "@types/jest": "^26.0.15",

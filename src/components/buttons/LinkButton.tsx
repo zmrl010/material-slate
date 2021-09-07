@@ -1,12 +1,11 @@
-import { ToggleButton } from "./ToggleButton";
-import React from "react";
+import ToggleButton from "@material-ui/lab/ToggleButton";
 import { useSlate } from "slate-react";
 import { ButtonProps } from "@material-ui/core";
 import { insertLink, isLinkActive } from "../../plugins";
 
 type Props = ButtonProps;
 
-export default function LinkButton(props: Props): JSX.Element {
+export function LinkButton(props: Props): JSX.Element {
   const { children, ...buttonProps } = props;
   const editor = useSlate();
 
@@ -29,3 +28,5 @@ export default function LinkButton(props: Props): JSX.Element {
     </ToggleButton>
   );
 }
+
+export default LinkButton;

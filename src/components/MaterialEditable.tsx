@@ -1,14 +1,16 @@
-import React, { useCallback, KeyboardEvent } from "react";
+import { useCallback, KeyboardEvent, forwardRef, ForwardedRef } from "react";
 import { Editable, useSlate } from "slate-react";
 import Leaf from "./Leaf";
 import Element from "./Element";
 import { isReactHotkey } from "../util/hotkey";
 import { fillSpaces } from "../util/text";
 import { createStyles, makeStyles } from "@material-ui/core";
+import { TextFormat } from "../slate/custom-types";
+import useEditorRef from "../slate/useEditorRef";
+import clsx from "clsx";
+import { theme } from "../theme";
 
 import type { EditableProps } from "slate-react/dist/components/editable";
-import { TextFormat } from "../slate/custom-types";
-import clsx from "clsx";
 
 const HOTKEYS = {
   "mod+b": "bold",
@@ -20,14 +22,16 @@ const HOTKEYS = {
 
 const TAB_SPACES = 4;
 
-const useStyles = makeStyles(() =>
-  createStyles({
-    editable: {
-      height: "100%",
-      width: "100%",
-      cursor: "text",
-    },
-  })
+const useStyles = makeStyles(
+  () =>
+    createStyles({
+      editable: {
+        height: "100%",
+        width: "100%",
+        cursor: "text",
+      },
+    }),
+  { name: "MaterialEditable", defaultTheme: theme }
 );
 
 function useEditableBindings() {
@@ -54,7 +58,10 @@ function useEditableBindings() {
 
 export type MaterialEditableProps = EditableProps;
 
-export function MaterialEditable(props: MaterialEditableProps): JSX.Element {
+export const MaterialEditable = forwardRef(function MaterialEditable(
+  props: MaterialEditableProps,
+  ref: ForwardedRef<HTMLDivElement>
+): JSX.Element {
   const { className, ...editableProps } = props;
 
   const renderElement = useCallback((props) => <Element {...props} />, []);
@@ -63,6 +70,8 @@ export function MaterialEditable(props: MaterialEditableProps): JSX.Element {
   const onKeyDown = useEditableBindings();
 
   const classes = useStyles();
+
+  useEditorRef(ref);
 
   return (
     <Editable
@@ -75,6 +84,6 @@ export function MaterialEditable(props: MaterialEditableProps): JSX.Element {
       {...editableProps}
     />
   );
-}
+});
 
 export default MaterialEditable;
