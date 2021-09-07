@@ -1,4 +1,3 @@
-import React from "react";
 import type { Text } from "slate";
 import type { RenderLeafProps } from "slate-react";
 
