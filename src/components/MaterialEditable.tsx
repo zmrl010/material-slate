@@ -5,8 +5,7 @@ import Element from "./Element";
 import { isReactHotkey } from "../util/hotkey";
 import { fillSpaces } from "../util/text";
 import { createStyles, makeStyles } from "@material-ui/core";
-import { TextFormat } from "../slate/custom-types";
-import useEditorRef from "../slate/useEditorRef";
+import { TextFormat, useEditorRef } from "../lib/slate";
 import clsx from "clsx";
 import { theme } from "../theme";
 

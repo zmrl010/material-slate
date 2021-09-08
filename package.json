@@ -8,9 +8,12 @@
     "type": "git",
     "url": "https://github.com/zimmerel/material-slate.git"
   },
-  "files": [
-    "src/**/*"
-  ],
+  "eslintConfig": {
+    "extends": "react-app",
+    "plugins": [
+      "eslint-plugin-material-ui"
+    ]
+  },
   "dependencies": {
     "@material-ui/core": "~4.11",
     "@material-ui/icons": "~4.11",
