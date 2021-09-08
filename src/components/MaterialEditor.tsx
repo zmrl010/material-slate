@@ -1,7 +1,7 @@
 import { ReactNode, useMemo } from "react";
 import { Descendant } from "slate";
 import { Slate } from "slate-react";
-import { makeEditor } from "../lib/slate";
+import { makeEditor } from "../lib";
 import { noopFunc } from "../util/func";
 
 export interface MaterialEditorProps {

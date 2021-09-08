@@ -8,7 +8,7 @@ import type {
   LinkElement,
   ImageElement,
   CheckListItemElement,
-} from "../../plugins";
+} from "../plugins";
 
 export type MaterialEditor = BaseEditor &
   ReactEditor &

@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "keywords": [],
-  "main": "src/index.tsx",
+  "main": "src/index.ts",
+  "exports": {
+    "./": "./src/"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/zimmerel/material-slate.git"

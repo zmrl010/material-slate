@@ -1,5 +1,5 @@
 import React from "react";
-import { HeadingElement } from "../../slate/custom-types";
+import { HeadingElement } from "../../lib/custom-types";
 import { RenderElementProps } from "slate-react";
 
 export interface HeadingElementProps extends RenderElementProps {
