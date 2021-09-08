@@ -2,7 +2,7 @@ import { createEditor } from "slate";
 import { withHistory } from "slate-history";
 import { withReact } from "slate-react";
 import { withBlocks, withMarks, withLinks, withImages } from "../plugins";
-import { MaterialEditor } from "./types";
+import { CustomEditor } from "./types";
 
 /**
  * Creates a rich text editor for Material UI with plugins:
@@ -13,7 +13,7 @@ import { MaterialEditor } from "./types";
  *  - withImages
  *  - withLinks
  */
-export function makeEditor(): MaterialEditor {
+export function makeEditor(): CustomEditor {
   return withImages(
     withLinks(withBlocks(withMarks(withHistory(withReact(createEditor())))))
   );

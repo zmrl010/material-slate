@@ -10,7 +10,7 @@ import type {
   CheckListItemElement,
 } from "../plugins";
 
-export type MaterialEditor = BaseEditor &
+export type CustomEditor = BaseEditor &
   ReactEditor &
   HistoryEditor &
   MarkEditor &
