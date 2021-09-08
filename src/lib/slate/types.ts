@@ -81,11 +81,3 @@ export type FormattedText = {
 export type TextFormat = Exclude<keyof FormattedText, "text">;
 
 export type CustomText = FormattedText;
-
-declare module "slate" {
-  interface CustomTypes {
-    Editor: MaterialEditor;
-    Text: CustomText;
-    Element: CustomElement;
-  }
-}
