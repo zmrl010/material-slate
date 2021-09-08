@@ -2,7 +2,7 @@ import { ButtonProps } from "@material-ui/core";
 import { AddPhotoAlternate as AddPhotoAlternateIcon } from "@material-ui/icons";
 import ToggleButton from "@material-ui/lab/ToggleButton";
 import { useSlate } from "slate-react";
-import { insertImage } from "../../plugins";
+import { insertImage } from "plugins";
 
 export interface UploadImage {
   (file: File): Promise<string>;

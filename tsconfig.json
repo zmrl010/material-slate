@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "outDir": "build",
     "baseUrl": "src",
     "target": "es6",
     "lib": [
@@ -7,6 +8,7 @@
       "dom.iterable",
       "esnext"
     ],
+    "declaration": true,
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -18,14 +20,13 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "noEmit": true,
     "noImplicitAny": true,
     "noImplicitThis": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "sourceMap": true,
+    "removeComments": true
   },
-  "include": [
-    "./src/**/*"
-  ],
+  "include": ["./src/**/*"],
   "exclude": [
     "node_modules"
   ]

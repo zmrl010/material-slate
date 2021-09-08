@@ -1,7 +1,7 @@
 import ToggleButton from "@material-ui/lab/ToggleButton";
 import { useSlate } from "slate-react";
 import { ButtonProps } from "@material-ui/core";
-import { ElementType } from "../../lib/custom-types";
+import { ElementType } from "lib";
 
 interface Props extends ButtonProps {
   format: ElementType;

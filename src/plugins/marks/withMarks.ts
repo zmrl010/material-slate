@@ -1,5 +1,5 @@
 import { Editor } from "slate";
-import { TextFormat } from "../../lib/custom-types";
+import { TextFormat } from "../../lib";
 
 export interface MarkEditor {
   isMarkActive: (format: TextFormat) => boolean;

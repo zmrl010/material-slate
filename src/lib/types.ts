@@ -59,6 +59,7 @@ export type BlockElement =
   | BlockQuoteElement
   | BulletedListElement
   | CheckListItemElement
+  | HeadingElement
   | HeadingOneElement
   | HeadingTwoElement
   | ListItemElement
