@@ -1,6 +1,6 @@
 import { Transforms, Range, Editor, Element } from "slate";
-import { isUrl } from "util/url";
-import { LinkElement } from "./types";
+import { isUrl } from "../../util/url";
+import type { LinkElement } from "./types";
 
 // export interface LinkEditor {
 //   insertLink: (url: string) => void;

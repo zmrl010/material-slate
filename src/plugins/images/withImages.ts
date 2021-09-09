@@ -4,7 +4,7 @@
 
 import { Editor, Transforms, Element as SlateElement } from "slate";
 import { isUrl } from "../../util/url";
-import { ImageElement } from "./types";
+import type { ImageElement } from "./types";
 
 const isString = (val: unknown): val is string => typeof val === "string";
 

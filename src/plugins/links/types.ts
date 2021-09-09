@@ -1,4 +1,4 @@
-import { Text } from "slate";
+import type { Text } from "slate";
 
 export interface LinkElement {
   type: "link";

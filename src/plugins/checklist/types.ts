@@ -1,4 +1,4 @@
-import { Text } from "slate";
+import type { Text } from "slate";
 
 export type CheckListItemElement = {
   type: "check-list-item";
