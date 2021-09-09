@@ -1,4 +1,4 @@
-import "@material-ui/lab/themeAugmentation";
+import type {} from "@material-ui/lab/themeAugmentation";
 import { createMuiTheme } from "@material-ui/core";
 import { unstable_createMuiStrictModeTheme } from "@material-ui/core";
 
