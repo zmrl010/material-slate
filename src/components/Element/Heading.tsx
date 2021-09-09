@@ -1,5 +1,5 @@
-import { HeadingElement } from "lib";
 import { RenderElementProps } from "slate-react";
+import { HeadingElement } from "../../lib";
 
 export interface HeadingElementProps extends RenderElementProps {
   element: HeadingElement;

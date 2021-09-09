@@ -1,7 +1,7 @@
 import { RenderElementProps } from "slate-react";
 import { Link } from "@material-ui/core";
 import { Image } from "./Image";
-import useIsKeyPressed from "hooks/useIsKeyPressed";
+import useIsKeyPressed from "../../hooks/useIsKeyPressed";
 // import { Heading } from "./Heading";
 
 export type ElementProps = RenderElementProps;

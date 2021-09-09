@@ -1,13 +1,14 @@
 import ToggleButton from "@material-ui/lab/ToggleButton";
 import { useSlate } from "slate-react";
-import { ButtonProps } from "@material-ui/core";
-import { ElementType } from "lib";
+import { ElementType } from "../../lib";
 
-interface Props extends ButtonProps {
+import type { ButtonProps } from "@material-ui/core";
+
+export interface BlockButtonProps extends ButtonProps {
   format: ElementType;
 }
 
-export function BlockButton(props: Props): JSX.Element {
+export function BlockButton(props: BlockButtonProps): JSX.Element {
   const { children, format, ...buttonProps } = props;
   const editor = useSlate();
 

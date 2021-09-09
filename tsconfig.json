@@ -1,7 +1,6 @@
 {
   "compilerOptions": {
     "outDir": "build",
-    "baseUrl": "src",
     "target": "es6",
     "lib": [
       "dom",
@@ -26,8 +25,4 @@
     "sourceMap": true,
     "removeComments": true
   },
-  "include": ["./src/**/*"],
-  "exclude": [
-    "node_modules"
-  ]
 }

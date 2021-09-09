@@ -1,7 +1,7 @@
-import { ButtonProps } from "@material-ui/core";
+import type { ButtonProps } from "@material-ui/core";
 import ToggleButton from "@material-ui/lab/ToggleButton";
 import { useSlate } from "slate-react";
-import { TextFormat } from "lib";
+import { TextFormat } from "../../lib";
 
 interface Props extends ButtonProps {
   format: TextFormat;
