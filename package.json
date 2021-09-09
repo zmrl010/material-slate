@@ -5,10 +5,9 @@
   "keywords": [],
   "main": "build/index.js",
   "types": "build/index.d.ts",
-  "exports": {
-    ".": "./build/index.js",
-    "./slate": "./build/slate.js"
-  },
+  "files": [
+    "build"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/zimmerel/material-slate.git"
@@ -49,7 +48,7 @@
   },
   "scripts": {
     "build": "tsc",
-    "prepare": "tsc"
+    "prepare": "tsc --outDir ."
   },
   "browserslist": [
     ">0.2%",
