@@ -2,7 +2,6 @@ import { ReactNode, useMemo } from "react";
 import { Descendant } from "slate";
 import { Slate } from "slate-react";
 import { makeEditor } from "../lib";
-import { noopFunc } from "../util/func";
 
 export interface MaterialEditorProps {
   onChange?: ((value: Descendant[]) => void) | undefined;
@@ -15,7 +14,7 @@ export interface MaterialEditorProps {
  * @param props
  */
 export function MaterialEditor(props: MaterialEditorProps): JSX.Element {
-  const { onChange = noopFunc, value = [], children } = props;
+  const { onChange = () => {}, value = [], children } = props;
   const editor = useMemo(() => makeEditor(), []);
 
   return (

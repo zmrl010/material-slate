@@ -3,7 +3,7 @@ import { Editable, useSlate } from "slate-react";
 import Leaf from "./Leaf";
 import Element from "./Element";
 import { isReactHotkey } from "../util/hotkey";
-import { fillSpaces } from "../util/text";
+import { spaces } from "../util/text";
 import { createStyles, makeStyles } from "@material-ui/core";
 import { useEditorRef, TextFormat } from "../lib";
 import clsx from "clsx";
@@ -46,7 +46,7 @@ function useEditableBindings() {
       });
       if (event.key === "Tab") {
         event.preventDefault();
-        editor.insertText(fillSpaces(TAB_SPACES));
+        editor.insertText(spaces(TAB_SPACES));
       }
     },
     [editor]
