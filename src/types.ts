@@ -1,6 +1,6 @@
-import { BaseEditor } from "slate";
-import { HistoryEditor } from "slate-history";
-import { ReactEditor } from "slate-react";
+import type { BaseEditor } from "slate";
+import type { HistoryEditor } from "slate-history";
+import type { ReactEditor } from "slate-react";
 import type {
   BlockEditor,
   MarkEditor,
@@ -8,7 +8,7 @@ import type {
   LinkElement,
   ImageElement,
   CheckListItemElement,
-} from "../plugins";
+} from "./plugins";
 
 export type CustomEditor = BaseEditor &
   ReactEditor &

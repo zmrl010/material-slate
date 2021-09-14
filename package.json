@@ -6,7 +6,8 @@
   "main": "index.js",
   "types": "index.d.ts",
   "files": [
-    "build/**/*"
+    "build/**/*",
+    "src/custom-types.d.ts"
   ],
   "repository": {
     "type": "git",

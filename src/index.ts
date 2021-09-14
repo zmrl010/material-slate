@@ -1,5 +1,3 @@
-import "./@types/slate";
-
 export * from "./components";
 export * from "./hooks";
 export * from "./util";
