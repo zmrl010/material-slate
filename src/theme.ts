@@ -1,8 +1,9 @@
-import type {} from "@material-ui/lab/themeAugmentation";
+import type {} from "@mui/lab/themeAugmentation";
 import {
-  createTheme as createMuiTheme,
+  createTheme as _createTheme,
   unstable_createMuiStrictModeTheme,
-} from "@material-ui/core";
+  adaptV4Theme,
+} from "@mui/material";
 
 /**
  * uses an unstable version in development because of the use of deprecated findDOMNode
@@ -10,16 +11,16 @@ import {
  */
 const createTheme =
   process.env.NODE_ENV === "production"
-    ? createMuiTheme
+    ? _createTheme
     : unstable_createMuiStrictModeTheme;
 
 /**
  * Base theme to be used if not wrapped in theme provider
  */
-export const theme = createTheme({
+export const theme = createTheme(adaptV4Theme({
   props: {
     MuiToggleButton: {
       size: "small",
     },
   },
-});
+}));

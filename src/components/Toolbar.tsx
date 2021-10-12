@@ -1,12 +1,5 @@
-import {
-  makeStyles,
-  Divider,
-  Paper,
-  ButtonGroup,
-  withStyles,
-  createStyles,
-  Theme,
-} from "@material-ui/core";
+import { Divider, Paper, ButtonGroup, Theme } from "@mui/material";
+import { makeStyles, withStyles, createStyles } from "@mui/styles";
 import {
   FormatBold as FormatBoldIcon,
   FormatItalic as FormatItalicIcon,
@@ -23,9 +16,14 @@ import {
   // FormatAlignJustify as FormatAlignJustifyIcon,
   FormatColorFill as FormatColorFillIcon,
   Link as LinkIcon,
-} from "@material-ui/icons";
-import { BlockButton, ImageButton, LinkButton, MarkButton } from "./buttons";
-import { UploadImage } from "./buttons/ImageButton";
+} from "@mui/icons-material";
+import {
+  BlockButton,
+  ImageButton,
+  LinkButton,
+  MarkButton,
+  UploadImage,
+} from "./buttons";
 import { theme } from "../theme";
 
 const useStyles = makeStyles(

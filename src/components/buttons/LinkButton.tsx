@@ -1,17 +1,14 @@
-import ToggleButton from "@material-ui/lab/ToggleButton";
 import { useSlate } from "slate-react";
-import type { ButtonProps } from "@material-ui/core";
+import { ToggleButton, ToggleButtonProps } from "@mui/material";
 import { insertLink, isLinkActive } from "../../plugins";
 
-type Props = ButtonProps;
-
-export function LinkButton(props: Props): JSX.Element {
-  const { children, ...buttonProps } = props;
+export function LinkButton(props: ToggleButtonProps): JSX.Element {
+  const { children, value, ...buttonProps } = props;
   const editor = useSlate();
 
   return (
     <ToggleButton
-      value={"link"}
+      value={value || "link"}
       selected={isLinkActive(editor)}
       onMouseDown={(e) => {
         e.preventDefault();
