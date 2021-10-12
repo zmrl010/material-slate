@@ -2,13 +2,16 @@ import { useSlate } from "slate-react";
 import { ToggleButton, ToggleButtonProps } from "@mui/material";
 import { insertLink, isLinkActive } from "../../plugins";
 
-export function LinkButton(props: ToggleButtonProps): JSX.Element {
-  const { children, value, ...buttonProps } = props;
+export type LinkButtonProps = Omit<ToggleButtonProps, "value">;
+
+export function LinkButton(props: LinkButtonProps): JSX.Element {
+  const { children, ...buttonProps } = props;
   const editor = useSlate();
 
   return (
     <ToggleButton
-      value={value || "link"}
+      value="link"
+      aria-label="link"
       selected={isLinkActive(editor)}
       onMouseDown={(e) => {
         e.preventDefault();

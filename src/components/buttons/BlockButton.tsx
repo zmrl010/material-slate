@@ -1,22 +1,23 @@
 import { ToggleButton, ToggleButtonProps } from "@mui/material";
 import { useSlate } from "slate-react";
-import { ElementType } from "../../lib";
+import { ElementType } from "../../types";
 
 export interface BlockButtonProps extends ToggleButtonProps {
-  format: ElementType;
+  value: ElementType;
 }
 
 export function BlockButton(props: BlockButtonProps): JSX.Element {
-  const { children, format, value, ...buttonProps } = props;
+  const { children, value, ...buttonProps } = props;
   const editor = useSlate();
 
   return (
     <ToggleButton
-      value={value || format}
-      selected={editor.isBlockActive({ type: format })}
+      value={value}
+      aria-label={value}
+      selected={editor.isBlockActive({ type: value })}
       onClick={(e) => {
         e.preventDefault();
-        editor.toggleBlock({ type: format });
+        editor.toggleBlock({ type: value });
       }}
       {...buttonProps}
     >

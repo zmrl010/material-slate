@@ -1,8 +1,6 @@
-import type {} from "@mui/lab/themeAugmentation";
 import {
   createTheme as _createTheme,
   unstable_createMuiStrictModeTheme,
-  adaptV4Theme,
 } from "@mui/material";
 
 /**
@@ -14,13 +12,12 @@ const createTheme =
     ? _createTheme
     : unstable_createMuiStrictModeTheme;
 
-/**
- * Base theme to be used if not wrapped in theme provider
- */
-export const theme = createTheme(adaptV4Theme({
-  props: {
+export const theme = createTheme({
+  components: {
     MuiToggleButton: {
-      size: "small",
+      defaultProps: {
+        size: "small",
+      },
     },
   },
-}));
+});

@@ -1,5 +1,5 @@
-import { Divider, Paper, ButtonGroup, Theme } from "@mui/material";
-import { makeStyles, withStyles, createStyles } from "@mui/styles";
+import { Divider, Paper, ButtonGroup } from "@mui/material";
+import { styled } from "@mui/material/styles";
 import {
   FormatBold as FormatBoldIcon,
   FormatItalic as FormatItalicIcon,
@@ -24,49 +24,46 @@ import {
   MarkButton,
   UploadImage,
 } from "./buttons";
-import { theme } from "../theme";
 
-const useStyles = makeStyles(
-  (theme: Theme) =>
-    createStyles({
-      paper: {
-        display: "flex",
-        border: `1px solid ${theme.palette.divider}`,
-        flexWrap: "wrap",
-      },
-      divider: {
-        margin: theme.spacing(1, 0.5),
-      },
-    }),
-  { name: "Toolbar", defaultTheme: theme }
-);
+const PREFIX = "Toolbar";
 
-const StyledButtonGroup = withStyles(
-  (theme) => ({
-    grouped: {
-      margin: theme.spacing(0.5),
-      border: "none",
-      "&:not(:first-child)": {
-        borderRadius: theme.shape.borderRadius,
-      },
-      "&:first-child": {
-        borderRadius: theme.shape.borderRadius,
-      },
+const classes = {
+  paper: `${PREFIX}-paper`,
+  divider: `${PREFIX}-divider`,
+};
+
+const Root = styled("div")(({ theme }) => ({
+  [`& .${classes.paper}`]: {
+    display: "flex",
+    border: `1px solid ${theme.palette.divider}`,
+    flexWrap: "wrap",
+  },
+
+  [`& .${classes.divider}`]: {
+    margin: theme.spacing(1, 0.5),
+  },
+}));
+
+const StyledButtonGroup = styled(ButtonGroup)(({ theme }) => ({
+  "& .MuiButtonGroup-grouped": {
+    margin: theme.spacing(0.5),
+    border: "none",
+    "&:not(:first-child)": {
+      borderRadius: theme.shape.borderRadius,
     },
-  }),
-  { name: "StyledButtonGroup", defaultTheme: theme }
-)(ButtonGroup);
+    "&:first-child": {
+      borderRadius: theme.shape.borderRadius,
+    },
+  },
+}));
 
 export interface ToolbarProps {
-  hiddenButtons?: number[];
   buttonSize?: "small" | "medium" | "large";
   uploadImage?: UploadImage;
   className?: string;
 }
 
 function VerticalDivider() {
-  const classes = useStyles();
-
   return (
     <Divider flexItem orientation="vertical" className={classes.divider} />
   );
@@ -74,22 +71,21 @@ function VerticalDivider() {
 
 export function Toolbar(props: ToolbarProps): JSX.Element {
   const { uploadImage } = props;
-  const classes = useStyles();
 
   return (
-    <div>
+    <Root>
       <Paper elevation={0} className={classes.paper}>
         <StyledButtonGroup>
-          <MarkButton format={"bold"}>
+          <MarkButton value={"bold"}>
             <FormatBoldIcon />
           </MarkButton>
-          <MarkButton format={"italic"}>
+          <MarkButton value={"italic"}>
             <FormatItalicIcon />
           </MarkButton>
-          <MarkButton format={"underline"}>
+          <MarkButton value={"underline"}>
             <FormatUnderlinedIcon />
           </MarkButton>
-          <MarkButton format={"code"}>
+          <MarkButton value={"code"}>
             <CodeIcon />
           </MarkButton>
         </StyledButtonGroup>
@@ -98,26 +94,26 @@ export function Toolbar(props: ToolbarProps): JSX.Element {
           <LinkButton>
             <LinkIcon />
           </LinkButton>
-          <MarkButton format={"fill"}>
+          <MarkButton value={"fill"}>
             <FormatColorFillIcon />
             {/* <ArrowDropDownIcon /> */}
           </MarkButton>
         </StyledButtonGroup>
         <VerticalDivider />
         <StyledButtonGroup>
-          <BlockButton format={"heading-one"}>
+          <BlockButton value={"heading-one"}>
             <LooksOneIcon />
           </BlockButton>
-          <BlockButton format={"heading-two"}>
+          <BlockButton value={"heading-two"}>
             <LooksTwoIcon />
           </BlockButton>
-          <BlockButton format={"block-quote"}>
+          <BlockButton value={"block-quote"}>
             <FormatQuoteIcon />
           </BlockButton>
-          <BlockButton format={"numbered-list"}>
+          <BlockButton value={"numbered-list"}>
             <FormatListNumberedIcon />
           </BlockButton>
-          <BlockButton format={"bulleted-list"}>
+          <BlockButton value={"bulleted-list"}>
             <FormatListBulletedIcon />
           </BlockButton>
         </StyledButtonGroup>
@@ -130,7 +126,7 @@ export function Toolbar(props: ToolbarProps): JSX.Element {
           </>
         )}
       </Paper>
-    </div>
+    </Root>
   );
 }
 

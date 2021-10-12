@@ -1,23 +1,24 @@
 import { ToggleButton, ToggleButtonProps } from "@mui/material";
 import { useSlate } from "slate-react";
-import type { TextFormat } from "../../lib";
+import type { TextFormat } from "../../types";
 
 interface Props extends ToggleButtonProps {
-  format: TextFormat;
+  value: TextFormat;
 }
 
 export function MarkButton(props: Props): JSX.Element {
-  const { children, format, value, ...buttonProps } = props;
+  const { children, value, ...buttonProps } = props;
   const editor = useSlate();
 
   return (
     <ToggleButton
-      value={value || format}
-      selected={editor.isMarkActive(format)}
+      value={value}
+      selected={editor.isMarkActive(value)}
       onMouseDown={(e) => {
         e.preventDefault();
-        editor.toggleMark(format);
+        editor.toggleMark(value);
       }}
+      aria-label={value}
       {...buttonProps}
     >
       {children}

@@ -4,13 +4,10 @@ import Leaf from "./Leaf";
 import Element from "./Element";
 import { isReactHotkey } from "../util/hotkey";
 import { spaces } from "../util/text";
-import createStyles from '@mui/styles/createStyles';
-import makeStyles from '@mui/styles/makeStyles';
-import { useEditorRef, TextFormat } from "../lib";
-import clsx from "clsx";
-import { theme } from "../theme";
+import { useEditorRef } from "../lib";
 
 import type { EditableProps } from "slate-react/dist/components/editable";
+import type { TextFormat } from "../types";
 
 const HOTKEYS = {
   "mod+b": "bold",
@@ -21,18 +18,6 @@ const HOTKEYS = {
 };
 
 const TAB_SPACES = 4;
-
-const useStyles = makeStyles(
-  () =>
-    createStyles({
-      editable: {
-        height: "100%",
-        width: "100%",
-        cursor: "text",
-      },
-    }),
-  { name: "MaterialEditable", defaultTheme: theme }
-);
 
 function useEditableBindings() {
   const editor = useSlate();
@@ -62,14 +47,12 @@ export const MaterialEditable = forwardRef(function MaterialEditable(
   props: MaterialEditableProps,
   ref: ForwardedRef<HTMLDivElement>
 ): JSX.Element {
-  const { className, ...editableProps } = props;
+  const { style, ...editableProps } = props;
 
   const renderElement = useCallback((props) => <Element {...props} />, []);
   const renderLeaf = useCallback((props) => <Leaf {...props} />, []);
 
   const onKeyDown = useEditableBindings();
-
-  const classes = useStyles();
 
   useEditorRef(ref);
 
@@ -79,7 +62,7 @@ export const MaterialEditable = forwardRef(function MaterialEditable(
       renderLeaf={renderLeaf}
       placeholder={"Start typing..."}
       spellCheck
-      className={clsx(classes.editable, className)}
+      style={{ height: "100%", width: "100%", cursor: "text", ...style }}
       onKeyDown={onKeyDown}
       {...editableProps}
     />

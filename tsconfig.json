@@ -16,7 +16,8 @@
     "rootDir": "./src",
     "sourceMap": true,
     "strict": true,
-    "target": "es6",
+    "target": "es6"
   },
-  "include": ["src/**/*"]
+  "include": ["src/**/*"],
+  "exclude": ["node_modules"]
 }

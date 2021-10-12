@@ -7,7 +7,7 @@ export interface UploadImage {
   (file: File): Promise<string>;
 }
 
-export interface ImageButtonProps extends ToggleButtonProps {
+export interface ImageButtonProps extends Omit<ToggleButtonProps, "value"> {
   uploadImage?: UploadImage;
 }
 
@@ -37,6 +37,7 @@ export function ImageButton(props: ImageButtonProps): JSX.Element {
       />
       <label htmlFor={"icon-button-file"}>
         <ToggleButton
+          value="image"
           aria-label="upload picture"
           component="span"
           {...buttonProps}
