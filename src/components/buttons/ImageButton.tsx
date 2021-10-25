@@ -25,13 +25,12 @@ export function ImageButton(props: ImageButtonProps): JSX.Element {
         onChange={async (e) => {
           const file = e.target.files?.[0];
           if (file && uploadImage) {
-            const url = await uploadImage(file);
-
-            if (!url) {
-              throw new Error("Problem uploading image");
+            try {
+              const url = await uploadImage(file);
+              insertImage(editor, url);
+            } catch (err) {
+              console.error(err);
             }
-
-            insertImage(editor, url);
           }
         }}
       />

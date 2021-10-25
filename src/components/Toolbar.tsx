@@ -25,33 +25,17 @@ import {
   UploadImage,
 } from "./buttons";
 
-const PREFIX = "Toolbar";
-
-const classes = {
-  paper: `${PREFIX}-paper`,
-  divider: `${PREFIX}-divider`,
-};
-
-const Root = styled("div")(({ theme }) => ({
-  [`& .${classes.paper}`]: {
-    display: "flex",
-    border: `1px solid ${theme.palette.divider}`,
-    flexWrap: "wrap",
-  },
-
-  [`& .${classes.divider}`]: {
-    margin: theme.spacing(1, 0.5),
-  },
-}));
-
 const StyledButtonGroup = styled(ButtonGroup)(({ theme }) => ({
   "& .MuiButtonGroup-grouped": {
     margin: theme.spacing(0.5),
     border: "none",
-    "&:not(:first-child)": {
+    "&.Mui-disabled": {
+      border: 0,
+    },
+    "&:not(:first-of-type)": {
       borderRadius: theme.shape.borderRadius,
     },
-    "&:first-child": {
+    "&:first-of-type": {
       borderRadius: theme.shape.borderRadius,
     },
   },
@@ -63,18 +47,23 @@ export interface ToolbarProps {
   className?: string;
 }
 
-function VerticalDivider() {
-  return (
-    <Divider flexItem orientation="vertical" className={classes.divider} />
-  );
-}
+const VerticalDivider = () => (
+  <Divider flexItem orientation="vertical" sx={{ mx: 0.5, my: 1 }} />
+);
 
 export function Toolbar(props: ToolbarProps): JSX.Element {
   const { uploadImage } = props;
 
   return (
-    <Root>
-      <Paper elevation={0} className={classes.paper}>
+    <div>
+      <Paper
+        elevation={0}
+        sx={{
+          display: "flex",
+          border: (theme) => `1px solid ${theme.palette.divider}`,
+          flexWrap: "wrap",
+        }}
+      >
         <StyledButtonGroup>
           <MarkButton value={"bold"}>
             <FormatBoldIcon />
@@ -126,7 +115,7 @@ export function Toolbar(props: ToolbarProps): JSX.Element {
           </>
         )}
       </Paper>
-    </Root>
+    </div>
   );
 }
 
